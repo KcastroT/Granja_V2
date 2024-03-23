@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using HappyHarvest;
 
 public class GameManager : MonoBehaviour
 {
     // Este script contiene todas las variables y funciones globales del juego
+    
     public static GameManager Instance { get; private set; }
+
     public int saldo;
     public GameObject pantallaInicio;
     public GameObject opcionesPanel;
