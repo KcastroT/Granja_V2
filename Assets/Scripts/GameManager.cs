@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
-// using HappyHarvest;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +20,10 @@ public class GameManager : MonoBehaviour
     public string nombre; // Variable to store the input name
 
     public string modoDeJuego;
+
+    public int contadorDeDias = 0;
+
+    public GameObject timer;
 
     private void Awake()
     {
@@ -44,7 +50,7 @@ public class GameManager : MonoBehaviour
         nombre = nameInputField.text; // Store the input name
         yield return new WaitForSeconds(1.5f);
         MostrarOpcionesPanel();
-        HUD.SetActive(true);
+        timer.SetActive(true);
     }
 
     public void CargarPantalladeInicio()
@@ -63,5 +69,16 @@ public class GameManager : MonoBehaviour
     public void GetModoDeJuego(string modo)
     {
         modoDeJuego = modo;
+    }
+
+    public void ToggleHUD(bool flag)
+    {
+        HUD.SetActive(flag);
+    }
+
+    public void Salir()
+    {
+        Application.Quit();
+        //Código para salir del juego y guardar los datos
     }
 }

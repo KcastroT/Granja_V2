@@ -5,6 +5,7 @@ public class PausaMenu : MonoBehaviour
 {
     public GameObject pausaPanel;
 
+
    public void Pause()
    {
     pausaPanel.SetActive(true);
