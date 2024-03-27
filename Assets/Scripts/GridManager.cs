@@ -20,7 +20,7 @@ public class GridManager : MonoBehaviour {
         _tiles = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
-                var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
+                var spawnedTile = Instantiate(_tilePrefab, new Vector3(x+4.5f, y-2.5f), Quaternion.identity);
                 var tileRenderer = spawnedTile.GetComponent<Renderer>();
                 var tileColor = tileRenderer.material.color;
                 tileColor.a = 1f;
