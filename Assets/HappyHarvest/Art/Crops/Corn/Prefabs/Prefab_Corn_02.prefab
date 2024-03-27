@@ -20,13 +20,17 @@ PrefabInstance:
       propertyPath: m_SpriteHash
       value: 823668940
       objectReference: {fileID: 0}
+    - target: {fileID: 3132859370898211767, guid: 96803fc30b7c77c4297ad4ba7edfdb17, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6393031248553476976, guid: 96803fc30b7c77c4297ad4ba7edfdb17, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: aa71ac71b4b4611438d5a3a9b9401d50, type: 3}
     - target: {fileID: 6393031248781673410, guid: 96803fc30b7c77c4297ad4ba7edfdb17, type: 3}
       propertyPath: m_Name
-      value: Prefab_corn_02
+      value: Prefab_Corn_02
       objectReference: {fileID: 0}
     - target: {fileID: 6393031248781673411, guid: 96803fc30b7c77c4297ad4ba7edfdb17, type: 3}
       propertyPath: m_RootOrder
