@@ -3330,6 +3330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571c077b0eb1541fcbbb5e25a13d25a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDragging: 0
 --- !u!1 &1304277219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3727,7 +3728,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeValue: 120
-  etapa: 3
   timeText: {fileID: 1406833252}
 --- !u!114 &1406833252
 MonoBehaviour:
@@ -5055,6 +5055,14 @@ PrefabInstance:
       propertyPath: clock
       value: 
       objectReference: {fileID: 1406833249}
+    - target: {fileID: 5079743909611074244, guid: e6ceb53d9981046fd89042833c162117, type: 3}
+      propertyPath: draggedMaiz
+      value: 
+      objectReference: {fileID: 1279757264}
+    - target: {fileID: 5079743909611074244, guid: e6ceb53d9981046fd89042833c162117, type: 3}
+      propertyPath: tileCollider
+      value: 
+      objectReference: {fileID: 2562817572485825427}
     - target: {fileID: 5787408565994707541, guid: e6ceb53d9981046fd89042833c162117, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.53
@@ -5104,12 +5112,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6ceb53d9981046fd89042833c162117, type: 3}
+--- !u!1 &2562817572485825427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8170230087511027784, guid: e6ceb53d9981046fd89042833c162117, type: 3}
+  m_PrefabInstance: {fileID: 1457737603694143562}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8790200699483454333 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2092753377519330341, guid: e6ceb53d9981046fd89042833c162117, type: 3}
   m_PrefabInstance: {fileID: 1457737603694143562}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2562817572485825427}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05bbcfca1b69042f1a1b4858c9ae9b0e, type: 3}

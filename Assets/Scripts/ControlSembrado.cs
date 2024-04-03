@@ -3,14 +3,41 @@ using UnityEngine;
 public class ControlSembrado : MonoBehaviour
 {
     public GameObject clock; // Referencia al GameObject que tiene el componente Timer.
+    public int etapa = 0;
+    private float etapaTimer = 0f; // Contador para controlar cuándo cambiar de etapa.
 
+    public GameObject tileCollider; // Asumo que este es el GameObject que tiene el componente Tile.
+    public GameObject draggedMaiz; // Asumo que este es el GameObject que tiene el componente DragMaiz.
+
+    void Start()
+    {
+        etapa = 0;
+        
+    }
 
     void FixedUpdate()
     {
-        Timer timer = clock.GetComponent<Timer>();
-        float etapa = timer.etapa;
+        // Obtener los componentes de los GameObjects.
+        Tile tileComponent = tileCollider.GetComponent<Tile>();
+        DragMaiz dragMaizComponent = draggedMaiz.GetComponent<DragMaiz>();
 
-        if (etapa==0)//cuadno no hay semillas
+        // Incrementar el contador de etapa.
+        etapaTimer += Time.deltaTime;
+
+        // Si el contador alcanza 1 segundo (o más), actualiza la etapa.
+        if(etapaTimer >= 1f)
+        {   
+            //EtapaChanger();
+            etapaTimer = 0f; // Restablecer el contador para el próximo segundo.
+        }
+        // Cambiar la etapa actual cuando 
+        if (tileComponent.IsTouched && dragMaizComponent.isDragging)
+        {
+            etapa = 1;
+        }
+        
+
+        if (etapa==0)//cuando no hay semillas
         {
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
@@ -28,9 +55,7 @@ public class ControlSembrado : MonoBehaviour
                 }
             }
         }
-
-        if (etapa==1)
-        {
+        else if (etapa==1){
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -51,7 +76,8 @@ public class ControlSembrado : MonoBehaviour
                     child.gameObject.SetActive(true);
                 }
             }
-        }else if (etapa==2){
+        }
+        else if (etapa==2){
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -72,7 +98,8 @@ public class ControlSembrado : MonoBehaviour
                     child.gameObject.SetActive(true);
                 }
             }
-        }else if (etapa==3){
+        }
+        else if (etapa==3){
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -93,7 +120,8 @@ public class ControlSembrado : MonoBehaviour
                     child.gameObject.SetActive(true);
                 }
             }
-        }else if (etapa==4){
+        }
+        else if (etapa==4){
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -114,7 +142,8 @@ public class ControlSembrado : MonoBehaviour
                     child.gameObject.SetActive(true);
                 }
             }
-        }else if (etapa==5){
+        }
+        else if (etapa==5){
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -136,6 +165,18 @@ public class ControlSembrado : MonoBehaviour
                 }
             }
     }
+    }
+    
+    void EtapaChanger()
+    {
+        // Aquí puedes añadir la lógica para cambiar de etapa. 
+        // Este ejemplo simplemente incrementa `etapa`.
+        etapa++;
+        if(etapa >= 5)
+        {
+            etapa = 0;
+        }
+        Debug.Log($"Cambio de etapa: {etapa}");
     }
 }
 

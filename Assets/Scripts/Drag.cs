@@ -3,22 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Drag: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
-{
+public class DragMaiz: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+{   
+    
     Transform parentAfterDrag;
+    public bool isDragging=false;
 
     public void OnBeginDrag (PointerEventData eventData) {
         Debug.Log("Begin drag");
         parentAfterDrag = transform.parent;
         transform. SetParent (transform. root); transform.SetAsLastSibling();
+        isDragging = true;
     }
 
     public void OnDrag (PointerEventData eventData) {
         Debug.Log("draging");
         transform.position=Input.mousePosition;
+        isDragging = true;
     }
     public void OnEndDrag (PointerEventData eventData) {
         Debug.Log("End drag");
-        transform. SetParent (parentAfterDrag);
+        transform.SetParent(parentAfterDrag);
+        isDragging = false;
+    }
+    //haz que cuando suelte el objeto se regrese a su lugar
+    public void OnDrop(PointerEventData eventData)
+    {
+        Debug.Log("Drop");
+        transform.position = parentAfterDrag.position;
     }
 }
