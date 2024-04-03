@@ -81,4 +81,9 @@ public class GameManager : MonoBehaviour
         Application.Quit();
         //Código para salir del juego y guardar los datos
     }
+
+    public void RegresarAlMenu()
+    {
+        SceneManager.LoadSceneAsync(0);
+    }
 }
