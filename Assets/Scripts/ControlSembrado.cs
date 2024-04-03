@@ -9,34 +9,38 @@ public class ControlSembrado : MonoBehaviour
     {
         Timer timer = clock.GetComponent<Timer>();
         float etapa = timer.etapa;
-        Debug.Log(timer.timeValue+"  "+etapa); // Muestra el valor de timeValue en la consola.
 
-        // Verifica si el valor de timeValue es menor a 110.
-        if (etapa==0)
+        if (etapa==0)//cuadno no hay semillas
+        {
+            // Itera sobre todos los hijos de este GameObject.
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+            
+                if (child.name == "lit")
+                {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else
+                {
+
+                    child.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        if (etapa==1)
         {
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
                 Transform child = transform.GetChild(i);
                 // Verifica si el nombre del hijo contiene la letra "a".
-                if (!child.name.Contains("a"))
+                if (child.name == "lit")
                 {
-                    // Si el nombre no contiene "a", desactiva el hijo.
-                    child.gameObject.SetActive(false);
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
                 }
-                else
-                {
-                    // Si el nombre contiene "a", asegura que el hijo esté activo.
-                    child.gameObject.SetActive(true);
-                }
-            }
-        }else if (etapa==1){
-            // Itera sobre todos los hijos de este GameObject.
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                Transform child = transform.GetChild(i);
-                // Verifica si el nombre del hijo contiene la letra "a".
-                if (!child.name.Contains("b"))
+                else if (!child.name.Contains("a"))
                 {
                     // Si el nombre no contiene "a", desactiva el hijo.
                     child.gameObject.SetActive(false);
@@ -53,12 +57,16 @@ public class ControlSembrado : MonoBehaviour
             {
                 Transform child = transform.GetChild(i);
                 // Verifica si el nombre del hijo contiene la letra "a".
-                if (!child.name.Contains("c"))
+                if (child.name == "lit")
                 {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else if (!child.name.Contains("b"))
+                {   
                     // Si el nombre no contiene "a", desactiva el hijo.
                     child.gameObject.SetActive(false);
-                }
-                else
+
+                }else
                 {
                     // Si el nombre contiene "a", asegura que el hijo esté activo.
                     child.gameObject.SetActive(true);
@@ -70,7 +78,11 @@ public class ControlSembrado : MonoBehaviour
             {
                 Transform child = transform.GetChild(i);
                 // Verifica si el nombre del hijo contiene la letra "a".
-                if (!child.name.Contains("d"))
+                if (child.name == "lit")
+                {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else if (!child.name.Contains("c"))
                 {
                     // Si el nombre no contiene "a", desactiva el hijo.
                     child.gameObject.SetActive(false);
@@ -87,7 +99,32 @@ public class ControlSembrado : MonoBehaviour
             {
                 Transform child = transform.GetChild(i);
                 // Verifica si el nombre del hijo contiene la letra "a".
-                if (!child.name.Contains("e"))
+                if (child.name == "lit")
+                {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else if (!child.name.Contains("d"))
+                {
+                    // Si el nombre no contiene "a", desactiva el hijo.
+                    child.gameObject.SetActive(false);
+                }
+                else
+                {
+                    // Si el nombre contiene "a", asegura que el hijo esté activo.
+                    child.gameObject.SetActive(true);
+                }
+            }
+        }else if (etapa==5){
+            // Itera sobre todos los hijos de este GameObject.
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                // Verifica si el nombre del hijo contiene la letra "a".
+                if (child.name == "lit")
+                {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else if (!child.name.Contains("e"))
                 {
                     // Si el nombre no contiene "a", desactiva el hijo.
                     child.gameObject.SetActive(false);
@@ -101,3 +138,4 @@ public class ControlSembrado : MonoBehaviour
     }
     }
 }
+

@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
-    [SerializeField] private Color _baseColor;
-    [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
+    [SerializeField] private SpriteRenderer _renderer;
+    [SerializeField] private Color _baseColor;
 
-    void Start() {
+    public void Init() {
         _renderer.color = _baseColor;
         _highlight.SetActive(false);
-
     }
+
     void OnMouseEnter() {
         _highlight.SetActive(true);
+        Debug.Log("Mouse enter");
     }
 
     void OnMouseExit()
