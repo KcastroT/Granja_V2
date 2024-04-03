@@ -6,7 +6,7 @@ public class ControlSembrado : MonoBehaviour
     public int etapa = 0;
     private float etapaTimer = 0f; // Contador para controlar cuándo cambiar de etapa.
 
-    public GameObject tileCollider; // Asumo que este es el GameObject que tiene el componente Tile.
+    public GameObject tile; // Asumo que este es el GameObject que tiene el componente Tile.
     public GameObject draggedMaiz; // Asumo que este es el GameObject que tiene el componente DragMaiz.
 
     void Start()
@@ -18,7 +18,7 @@ public class ControlSembrado : MonoBehaviour
     void FixedUpdate()
     {
         // Obtener los componentes de los GameObjects.
-        Tile tileComponent = tileCollider.GetComponent<Tile>();
+        Tile tileComponent = tile.GetComponent<Tile>();
         DragMaiz dragMaizComponent = draggedMaiz.GetComponent<DragMaiz>();
 
         // Incrementar el contador de etapa.
