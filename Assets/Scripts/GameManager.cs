@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject timer;
 
+    public GameObject tutorialPanel;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -50,8 +53,15 @@ public class GameManager : MonoBehaviour
         nombre = nameInputField.text; // Store the input name
         yield return new WaitForSeconds(1.5f);
         MostrarOpcionesPanel();
+        //Wait until the player clicks;
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        yield return new WaitForSeconds(1.5f);
+        tutorialPanel.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
         timer.SetActive(true);
     }
+
+   
 
     public void CargarPantalladeInicio()
     {   
@@ -76,11 +86,13 @@ public class GameManager : MonoBehaviour
         HUD.SetActive(flag);
     }
 
+    /*
     public void Salir()
     {
         Application.Quit();
         //Código para salir del juego y guardar los datos
     }
+    */
 
     public void RegresarAlMenu()
     {
