@@ -50,7 +50,7 @@ public class DialogManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             diaglogText.text += letter;
-            yield return null;
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
