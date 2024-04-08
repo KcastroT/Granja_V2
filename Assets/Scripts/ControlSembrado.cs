@@ -1,17 +1,24 @@
 using UnityEngine;
+using Unity;
+using System.Collections;
 
+namespace WorldTime {
 public class ControlSembrado : MonoBehaviour
 {
     public GameObject clock; // Referencia al GameObject que tiene el componente Timer.
     public int etapa = 0;
     private float etapaTimer = 0f; // Contador para controlar cuándo cambiar de etapa.
 
+    private bool sembrado;
+
+    public GameObject light; // Asumo que este es el GameObject que tiene el componente WorldLight.
     public GameObject tile; // Asumo que este es el GameObject que tiene el componente Tile.
     public GameObject draggedMaiz; // Asumo que este es el GameObject que tiene el componente DragMaiz.
 
     void Start()
     {
         etapa = 0;
+        sembrado = false;
         
     }
 
@@ -20,16 +27,12 @@ public class ControlSembrado : MonoBehaviour
         // Obtener los componentes de los GameObjects.
         Tile tileComponent = tile.GetComponent<Tile>();
         DragMaiz dragMaizComponent = draggedMaiz.GetComponent<DragMaiz>();
+        WorldLight worldLightComponent = light.GetComponent<WorldLight>();
+
 
         // Incrementar el contador de etapa.
         etapaTimer += Time.deltaTime;
 
-        // Si el contador alcanza 1 segundo (o más), actualiza la etapa.
-        if(etapaTimer >= 1f)
-        {   
-            //EtapaChanger();
-            etapaTimer = 0f; // Restablecer el contador para el próximo segundo.
-        }
         // Cambiar la etapa actual cuando 
         if (tileComponent.IsTouched && dragMaizComponent.isDragging)
         {
@@ -165,18 +168,26 @@ public class ControlSembrado : MonoBehaviour
                 }
             }
     }
+    
+
+        if(etapa !=0 && worldLightComponent.running && !sembrado){
+            sembrado = true; // Asegura que esta lógica se ejecute una sola vez.
+            StartCoroutine(CambiarEtapaConRetraso());
+        }
+    }
+    IEnumerator CambiarEtapaConRetraso()
+    {
+        for (int i = 1; i <= 5; i++)
+        {   
+            etapa = i;
+            Debug.Log("etapa: "+i);
+            // Espera un segundo antes de continuar con el próximo número.
+            yield return new WaitForSeconds(0.6f);
+        }
     }
     
-    void EtapaChanger()
-    {
-        // Aquí puedes añadir la lógica para cambiar de etapa. 
-        // Este ejemplo simplemente incrementa `etapa`.
-        etapa++;
-        if(etapa >= 5)
-        {
-            etapa = 0;
-        }
-        Debug.Log($"Cambio de etapa: {etapa}");
-    }
+    
 }
+}
+
 
