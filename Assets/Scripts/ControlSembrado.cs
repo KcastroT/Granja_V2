@@ -35,7 +35,7 @@ public class ControlSembrado : MonoBehaviour
         etapaTimer += Time.deltaTime;
 
         // Cambiar la etapa actual cuando 
-        if (tileComponent.IsTouched && dragMaizComponent.isDragging)
+        if (tileComponent.IsTouched && DragMaiz.isDragging)
         {
             etapa = 1;
         }
