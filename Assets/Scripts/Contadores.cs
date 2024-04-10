@@ -17,7 +17,7 @@ public class Contadores : MonoBehaviour
         contadorMaiz++;
         ActualizarTextoContadorMaiz();
 
-        sistemaMoneda.RestarMonedas(1);
+        sistemaMoneda.RestarMonedas(10);
     }
 
     public void DecrementarContadorMaiz()
