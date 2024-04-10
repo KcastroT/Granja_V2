@@ -11,6 +11,7 @@ public class ControlSembrado : MonoBehaviour
 
     private bool sembrado;
 
+
     public GameObject light; // Asumo que este es el GameObject que tiene el componente WorldLight.
     public GameObject tile; // Asumo que este es el GameObject que tiene el componente Tile.
     public GameObject draggedMaiz; // Asumo que este es el GameObject que tiene el componente DragMaiz.

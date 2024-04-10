@@ -17,9 +17,19 @@ public class sistemaMoneda : MonoBehaviour
             ActualizarTextoMoneda();
     }
 
-    void Update()
+     public void RestarMonedas(int cantidad)
     {
+        Debug.Log("Restando " + cantidad + " monedas.");
+        moneda -= cantidad;
+        ActualizarTextoMoneda();
     }
+
+    public void SumarMonedas(int cantidad)
+    {
+        moneda += cantidad;
+        ActualizarTextoMoneda();
+    }
+
 
     void ActualizarTextoMoneda()
     {
