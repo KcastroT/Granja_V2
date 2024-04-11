@@ -16,6 +16,7 @@ namespace Contador
         {
             contadorMaiz++;
             ActualizarTextoContadorMaiz();
+            DragMaiz.canDrag = true;
 
             sistemaMoneda.RestarMonedas(10);
         }
@@ -23,10 +24,11 @@ namespace Contador
         public void DecrementarContadorMaiz()
         {
             contadorMaiz--;
-            if (contadorMaiz < 0)
+            if (contadorMaiz <= 0)
             {
                 contadorMaiz = 0;
-
+                DragMaiz.canDrag = false;
+                DragMaiz.isDragging = false;
             }
             ActualizarTextoContadorMaiz();
         }
@@ -35,5 +37,6 @@ namespace Contador
         {
             textoContadorMaiz.text = contadorMaiz.ToString();
         }
+
     }
 }

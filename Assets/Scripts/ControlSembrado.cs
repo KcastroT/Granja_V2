@@ -81,6 +81,7 @@ public class ControlSembrado : MonoBehaviour
                 }
             }
         }
+        
         else if (etapa==2){
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
