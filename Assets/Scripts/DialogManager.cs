@@ -12,6 +12,7 @@ public class DialogManager : MonoBehaviour
 
     public Animator animator;
 
+    
     void Start()
     {
       sentences = new Queue<string>();   
@@ -36,6 +37,7 @@ public class DialogManager : MonoBehaviour
         if (sentences.Count == 0)
         {
             EndDialog();
+            FindObjectOfType<GameManager>().TutorialActive = false;
             return;
         }
 
@@ -46,6 +48,7 @@ public class DialogManager : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence)
     {
+        
         diaglogText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     // Este script contiene todas las variables y funciones globales del juego
-    
+
     public static GameManager Instance { get; private set; }
 
     public int saldo;
@@ -27,7 +27,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject tutorialPanel;
 
+    private bool GameStarted = false;
 
+    public bool TutorialActive = false;
     private void Awake()
     {
         if (Instance == null)
@@ -47,25 +49,26 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowPantallaInicioWithDelay()
     {
+        ToggleHUD(false);
         yield return new WaitForSeconds(1.5f);
         CargarPantalladeInicio();
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
-        nombre = nameInputField.text; // Store the input name
+        nombre = nameInputField.text;
         yield return new WaitForSeconds(1.5f);
         MostrarOpcionesPanel();
-        //Wait until the player clicks;
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        yield return new WaitUntil(() => GameStarted == true);
         yield return new WaitForSeconds(1.5f);
         tutorialPanel.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        ToggleHUD(true, false);  // HUD is visible but not interactable
+        TutorialActive = true;
+        yield return new WaitUntil(() => TutorialActive == false);  // Wait for tutorial to finish
+        ToggleHUD(true, true);  // Make HUD interactable again
         timer.SetActive(true);
     }
 
-   
 
     public void CargarPantalladeInicio()
-    {   
-        HUD.SetActive(false);
+    {
         pantallaInicio.SetActive(true);
     }
 
@@ -73,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         pantallaInicio.SetActive(false);
         opcionesPanel.SetActive(true);
-        
+
     }
 
     public void GetModoDeJuego(string modo)
@@ -81,10 +84,34 @@ public class GameManager : MonoBehaviour
         modoDeJuego = modo;
     }
 
-    public void ToggleHUD(bool flag)
+    public void StartGame()
     {
-        HUD.SetActive(flag);
+        GameStarted = true;
     }
+
+    // Supongamos que esta es tu función ToggleHUD
+    public void ToggleHUD(bool show, bool interactable = false)
+{
+    // Obtain the CanvasGroup component from the HUD
+    CanvasGroup hudCanvasGroup = HUD.GetComponent<CanvasGroup>();
+
+    if (show)
+    {
+        // Make the HUD visible
+        hudCanvasGroup.alpha = 1;
+        // Set interaction properties based on the parameter
+        hudCanvasGroup.blocksRaycasts = interactable;
+        hudCanvasGroup.interactable = interactable;
+    }
+    else
+    {
+        // Hide the HUD
+        hudCanvasGroup.alpha = 0;
+        hudCanvasGroup.blocksRaycasts = false;
+        hudCanvasGroup.interactable = false;
+    }
+}
+
 
     /*
     public void Salir()
