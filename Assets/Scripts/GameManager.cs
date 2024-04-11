@@ -61,7 +61,8 @@ public class GameManager : MonoBehaviour
         tutorialPanel.SetActive(true);
         ToggleHUD(true, false);  // HUD is visible but not interactable
         TutorialActive = true;
-        yield return new WaitUntil(() => TutorialActive == false);  // Wait for tutorial to finish
+        yield return new WaitUntil(() => TutorialActive == false);
+        tutorialPanel.SetActive(false);  // Wait for tutorial to finish
         ToggleHUD(true, true);  // Make HUD interactable again
         timer.SetActive(true);
     }
