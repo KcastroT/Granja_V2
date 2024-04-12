@@ -12,12 +12,16 @@ public class ControlSembrado : MonoBehaviour
 
     private bool sembrado;
 
+    private  int cocktador = 0;
+
+
 
 
 
     public GameObject light; // Asumo que este es el GameObject que tiene el componente WorldLight.
     public GameObject tile; // Asumo que este es el GameObject que tiene el componente Tile.
     public GameObject draggedMaiz; // Asumo que este es el GameObject que tiene el componente DragMaiz.
+    public GameObject PlantingCrop;
 
     void Start()
     {
@@ -67,6 +71,9 @@ public class ControlSembrado : MonoBehaviour
         }
         else if (etapa==1){
             sembrado = true;
+
+            //Reproduce sonido de sembrado
+            sound();
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -191,6 +198,15 @@ public class ControlSembrado : MonoBehaviour
             Debug.Log("etapa: "+i);
             // Espera un segundo antes de continuar con el próximo número.
             yield return new WaitForSeconds(0.6f);
+        }
+    }
+
+    void sound()
+    {
+        if (cocktador == 0)
+        {
+            cocktador++;
+            PlantingCrop.GetComponent<AudioSource>().Play();
         }
     }
     
