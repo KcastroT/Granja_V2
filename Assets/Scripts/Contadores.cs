@@ -10,7 +10,12 @@ namespace Contador
 
         public sistemaMoneda sistemaMoneda;
         public TextMeshProUGUI textoContadorMaiz;
-        public int contadorMaiz = 0;
+        public int contadorMaiz ;
+
+        private void Start()
+        {
+            IncrementarContadorMaiz();
+        }
 
         public void IncrementarContadorMaiz()
         {
@@ -24,7 +29,7 @@ namespace Contador
         public void DecrementarContadorMaiz()
         {
             contadorMaiz--;
-            if (contadorMaiz <= 0)
+            if (contadorMaiz < 0)
             {
                 contadorMaiz = 0;
                 DragMaiz.canDrag = false;

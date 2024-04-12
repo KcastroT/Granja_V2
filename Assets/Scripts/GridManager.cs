@@ -18,14 +18,12 @@ public class GridManager : MonoBehaviour {
         _tiles = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
-                var spawnedTile = Instantiate(_tilePrefab, new Vector3(x+3.6f, y-3f), Quaternion.identity);
+                var spawnedTile = Instantiate(_tilePrefab, new Vector3(3.9f+(x * 1.8f), (y * 1.8f)-2.4f), Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
                 spawnedTile.Init();
-
 
                 _tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
-
     }
 }
