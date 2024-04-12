@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
     // Este script contiene todas las variables y funciones globales del juego
 
     public static GameManager Instance { get; private set; }
-
-    public int saldo;
     public GameObject pantallaInicio;
     public GameObject opcionesPanel;
     public TMP_InputField nameInputField; // TMP_InputField instead of InputField
@@ -30,6 +28,8 @@ public class GameManager : MonoBehaviour
     private bool GameStarted = false;
 
     public bool TutorialActive = false;
+
+    public GameObject eventManager;
     private void Awake()
     {
         if (Instance == null)
@@ -62,9 +62,10 @@ public class GameManager : MonoBehaviour
         ToggleHUD(true, false);  // HUD is visible but not interactable
         TutorialActive = true;
         yield return new WaitUntil(() => TutorialActive == false);
-        tutorialPanel.SetActive(false);  // Wait for tutorial to finish
+        // Wait for tutorial to finish
         ToggleHUD(true, true);  // Make HUD interactable again
         timer.SetActive(true);
+        eventManager.SetActive(true);
     }
 
 
@@ -113,17 +114,4 @@ public class GameManager : MonoBehaviour
     }
 }
 
-
-    /*
-    public void Salir()
-    {
-        Application.Quit();
-        //Código para salir del juego y guardar los datos
-    }
-    */
-
-    public void RegresarAlMenu()
-    {
-        SceneManager.LoadSceneAsync(0);
-    }
 }
