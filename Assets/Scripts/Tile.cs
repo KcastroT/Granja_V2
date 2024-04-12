@@ -2,7 +2,9 @@ using UnityEngine;
 using Contador;
 using WorldTime;
 
-public class Tile : MonoBehaviour {
+public class Tile : MonoBehaviour { 
+    //Este codigo namas hace que se resalte el tile cuando se pase el mouse por encima
+    //no tiene ninguna otra funcion, no plantes nada aqui y no hagas nada con contadores
 
     [SerializeField] private GameObject _highlight;
     [SerializeField] private SpriteRenderer _renderer;
@@ -18,10 +20,9 @@ public class Tile : MonoBehaviour {
 
     void OnMouseEnter() {
     _highlight.SetActive(true);
-    Debug.Log("Mouse enter");
-    IsTouched = true;
-    contadorMaiz();
-}
+    Debug.Log("Mouse enter"); 
+    IsTouched=true;   
+    }
 
     void OnMouseExit()
     {
@@ -29,12 +30,5 @@ public class Tile : MonoBehaviour {
         IsTouched=false;
     }
 
-    void contadorMaiz() 
-    {
-        if (IsTouched && DragMaiz.isDragging)
-        {
-            Contadores contadores = GameObject.FindObjectOfType<Contadores>();
-            contadores.DecrementarContadorMaiz();
-        }
-    }
+    
 }

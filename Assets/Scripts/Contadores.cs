@@ -29,7 +29,7 @@ namespace Contador
         public void DecrementarContadorMaiz()
         {
             contadorMaiz--;
-            if (contadorMaiz < 0)
+            if (contadorMaiz <= 0)
             {
                 contadorMaiz = 0;
                 DragMaiz.canDrag = false;

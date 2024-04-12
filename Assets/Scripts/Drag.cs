@@ -10,6 +10,9 @@ public class DragMaiz : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public static bool canDrag = false;
 
+
+
+    
     public void OnBeginDrag(PointerEventData eventData)
     {
         if(canDrag){
@@ -29,6 +32,9 @@ public class DragMaiz : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Debug.Log("Dragging");
         transform.position = Input.mousePosition;
         isDragging = true;
+
+
+
         }
     }
     public void OnEndDrag(PointerEventData eventData)

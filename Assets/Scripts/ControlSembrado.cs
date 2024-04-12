@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity;
+using Contador;
 using System.Collections;
 
 namespace WorldTime {
@@ -10,6 +11,8 @@ public class ControlSembrado : MonoBehaviour
     private float etapaTimer = 0f; // Contador para controlar cuándo cambiar de etapa.
 
     private bool sembrado;
+
+
 
 
     public GameObject light; // Asumo que este es el GameObject que tiene el componente WorldLight.
@@ -35,14 +38,17 @@ public class ControlSembrado : MonoBehaviour
         etapaTimer += Time.deltaTime;
 
         // Cambiar la etapa actual cuando 
-        if (tileComponent.IsTouched && DragMaiz.isDragging)
+        if (tileComponent.IsTouched && DragMaiz.isDragging && !sembrado)
         {
             etapa = 1;
+            //en esta condicion lo quiero decrementar al contador maiz
+            GameObject.FindAnyObjectByType<Contadores>().DecrementarContadorMaiz();
         }
         
 
         if (etapa==0)//cuando no hay semillas
         {
+            sembrado = false;
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -60,6 +66,7 @@ public class ControlSembrado : MonoBehaviour
             }
         }
         else if (etapa==1){
+            sembrado = true;
             // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -172,8 +179,7 @@ public class ControlSembrado : MonoBehaviour
     }
     
 
-        if(etapa !=0 && worldLightComponent.running && !sembrado){
-            sembrado = true; // Asegura que esta lógica se ejecute una sola vez.
+        if(etapa !=0 && worldLightComponent.running && sembrado){
             StartCoroutine(CambiarEtapaConRetraso());
         }
     }
@@ -187,6 +193,8 @@ public class ControlSembrado : MonoBehaviour
             yield return new WaitForSeconds(0.6f);
         }
     }
+    
+
     
     
 }
