@@ -4,15 +4,18 @@ using UnityEngine.Events;
 using UnityEngine.UI;  // Necessary for UI manipulation
 using TMPro;  
 
+
 public class EventManager : MonoBehaviour
 {
     public List<GameEvent> possibleEvents;
     public DialogTrigger dialogTrigger; // Reference to the DialogTrigger
+ 
 
-    public void Start()
-    {
-        InvokeRepeating("TriggerRandomEvent", 5f, 15f); // Trigger a random event every 5 seconds
-    }
+    // public void Start()
+    // {   
+
+    //     //InvokeRepeating("TriggerRandomEvent", 5f, 15f); // Trigger a random event every 5 seconds
+    // }
     public void TriggerRandomEvent()
     {
         float totalWeight = 0f;

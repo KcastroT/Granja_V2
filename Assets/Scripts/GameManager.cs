@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         StartCoroutine(ShowPantallaInicioWithDelay());
+        contadorDeDias = 0;
     }
 
     IEnumerator ShowPantallaInicioWithDelay()
@@ -65,9 +66,22 @@ public class GameManager : MonoBehaviour
         // Wait for tutorial to finish
         ToggleHUD(true, true);  // Make HUD interactable again
         timer.SetActive(true);
-        eventManager.SetActive(true);
+        
     }
 
+    public void AumentoDeDias()
+    {
+        contadorDeDias++;
+        print("Día " + contadorDeDias);
+        StartCoroutine(SacarNoticia());
+    }
+
+    IEnumerator SacarNoticia()  // Function to trigger a random event
+    {   
+        yield return new WaitForSeconds(3f);
+        eventManager.SetActive(true);
+        eventManager.GetComponent<EventManager>().TriggerRandomEvent();
+    }
 
     public void CargarPantalladeInicio()
     {
