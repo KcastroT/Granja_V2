@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SacarNoticia()  // Function to trigger a random event
     {   
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4.5f);
         eventManager.SetActive(true);
         eventManager.GetComponent<EventManager>().TriggerRandomEvent();
     }

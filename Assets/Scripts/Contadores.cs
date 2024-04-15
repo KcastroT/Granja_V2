@@ -10,11 +10,15 @@ namespace Contador
 
         public sistemaMoneda sistemaMoneda;
         public TextMeshProUGUI textoContadorMaiz;
+        public TextMeshProUGUI textoContadorTrigo;
+
         public int contadorMaiz ;
+        public int contadorTrigo;
 
         private void Start()
         {
             IncrementarContadorMaiz();
+            IncrementarContadorTrigo();
         }
 
         public void IncrementarContadorMaiz()
@@ -26,6 +30,13 @@ namespace Contador
             sistemaMoneda.RestarMonedas(10);
         }
 
+        public void IncrementarContadorTrigo(){
+            contadorTrigo++;
+            ActualizarTextoContadorTrigo();
+            DragTrigo.canDrag = true;
+
+            sistemaMoneda.RestarMonedas(10);
+        }
         public void DecrementarContadorMaiz()
         {
             contadorMaiz--;
@@ -38,9 +49,25 @@ namespace Contador
             ActualizarTextoContadorMaiz();
         }
 
+        public void DecrementarContadorTrigo()
+        {
+            contadorTrigo--;
+            if (contadorTrigo <= 0)
+            {
+                contadorTrigo = 0;
+                DragTrigo.canDrag = false;
+                DragTrigo.isDragging = false;
+            }
+            ActualizarTextoContadorTrigo();
+        }
+
         private void ActualizarTextoContadorMaiz()
         {
             textoContadorMaiz.text = contadorMaiz.ToString();
+        }
+        private void ActualizarTextoContadorTrigo()
+        {
+            textoContadorTrigo.text = contadorTrigo.ToString();
         }
 
     }
