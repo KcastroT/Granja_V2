@@ -108,6 +108,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2530407663974988193, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
+      propertyPath: _baseColor.a
+      value: 0.4745098
+      objectReference: {fileID: 0}
     - target: {fileID: 2707817273541367719, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -142,11 +146,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3072704532031599944, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3090014916707169968, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3322508976360637634, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
       propertyPath: m_LocalScale.x
@@ -266,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 0c0e277deb754894e8a170f419e64bcc, type: 3}
     - target: {fileID: 7635320192810365923, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7765745379162684983, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
       propertyPath: m_LocalScale.x
@@ -294,7 +298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8285326083362537128, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8611443850401147935, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
       propertyPath: m_IsActive
@@ -306,15 +310,37 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 0c0e277deb754894e8a170f419e64bcc, type: 3}
     - target: {fileID: 9205541988098085671, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3067445135897069282, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1942918067180064225, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 795094907046127547}
   m_SourcePrefab: {fileID: 100100000, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
 --- !u!1 &4729993387483328371 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1942918067180064225, guid: 0eb4005296a954366bb739659e56dde2, type: 3}
   m_PrefabInstance: {fileID: 6580584087786300050}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &795094907046127547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4729993387483328371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39390ddb804e94d89803feec76f731eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clock: {fileID: 0}
+  etapa: 3
+  light: {fileID: 0}
+  tile: {fileID: 4729993387483328371}
+  draggedTrigo: {fileID: 0}
+  PlantingCrop: {fileID: 0}
