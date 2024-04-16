@@ -12,6 +12,9 @@ public class DialogManager : MonoBehaviour
 
     public Animator animator;
 
+    public GameObject image;
+
+
     
     void Start()
     {
@@ -68,6 +71,13 @@ public class DialogManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             DisplayNextSentence();
+        }
+
+        if(FindObjectOfType<GameManager>().TutorialActive == false)
+        {
+            image.SetActive(false);
+        }else{
+            image.SetActive(true);
         }
     }
 }
