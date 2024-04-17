@@ -11,7 +11,9 @@ public class DragCebada : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public static bool canDrag = false;
 
-
+    void Start() {
+    canDrag = true; // Asegúrate de que el arrastre esté habilitado desde el inicio
+    }
 
     
     public void OnBeginDrag(PointerEventData eventData)

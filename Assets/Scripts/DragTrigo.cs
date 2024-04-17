@@ -11,7 +11,9 @@ public class DragTrigo : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public static bool canDrag = false;
 
-
+    void Start() {
+    canDrag = true; // Asegúrate de que el arrastre esté habilitado desde el inicio
+    }
 
     
     public void OnBeginDrag(PointerEventData eventData)
