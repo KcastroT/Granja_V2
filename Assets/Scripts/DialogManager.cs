@@ -6,6 +6,8 @@ using TMPro;
 public class DialogManager : MonoBehaviour
 {
     private Queue<string> sentences;
+
+    public GameObject dialogBox;
     
     public TextMeshProUGUI diaglogText;
     public TextMeshProUGUI nameText;
@@ -34,6 +36,12 @@ public class DialogManager : MonoBehaviour
 
         DisplayNextSentence();
     }
+
+    public void ApagaTutorial(){
+        dialogBox.SetActive(false);
+    }
+
+
 
     public void DisplayNextSentence()
     {
@@ -68,10 +76,6 @@ public class DialogManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DisplayNextSentence();
-        }
 
         if(FindObjectOfType<GameManager>().TutorialActive == false)
         {
