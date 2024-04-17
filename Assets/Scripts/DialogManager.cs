@@ -38,7 +38,9 @@ public class DialogManager : MonoBehaviour
     }
 
     public void ApagaTutorial(){
-        dialogBox.SetActive(false);
+        sentences.Clear();
+        FindObjectOfType<GameManager>().TutorialActive = false;
+        animator.SetBool("IsOpen", false);
     }
 
 
