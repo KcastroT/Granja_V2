@@ -2,11 +2,14 @@ using UnityEngine;
 using Unity;
 using Contador;
 using System.Collections;
+using JetBrains.Annotations;
 
 namespace WorldTime {
 public class ZanahoriaControlSembrado : MonoBehaviour
 {
     public GameObject clock; // Referencia al GameObject que tiene el componente Timer.
+    public GameObject RebootEtapa;
+
     public int etapa = 0;
     private float etapaTimer = 0f; // Contador para controlar cuándo cambiar de etapa.
 
@@ -25,8 +28,12 @@ public class ZanahoriaControlSembrado : MonoBehaviour
     {
         etapa = 0;
         sembrado = false;
+        cocktador = 0;
         
     }
+
+
+
 
     void Update()
     {
@@ -34,10 +41,19 @@ public class ZanahoriaControlSembrado : MonoBehaviour
         Tile tileComponent = tile.GetComponent<Tile>();
         DragZanahoria dragZanahoriaComponent = draggedZanahoria.GetComponent<DragZanahoria>();
         WorldLight worldLightComponent = light.GetComponent<WorldLight>();
+        RebootEtapa rebootEtapaComponent = RebootEtapa.GetComponent<RebootEtapa>();
 
 
         // Incrementar el contador de etapa.
         etapaTimer += Time.deltaTime;
+
+        if (rebootEtapaComponent.reboot)
+        {
+            etapa = 0;
+            sembrado = false;
+            cocktador = 0;
+        }
+
 
         if (sembrado && worldLightComponent.running && etapa != 0) {
                 if (etapaTimer >= tiempoCambioEtapa) {

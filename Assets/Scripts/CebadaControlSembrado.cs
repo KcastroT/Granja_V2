@@ -7,6 +7,8 @@ namespace WorldTime {
 public class CebadaControlSembrado : MonoBehaviour
 {
     public GameObject clock; // Referencia al GameObject que tiene el componente Timer.
+
+    public GameObject RebootEtapa;
     public int etapa = 0;
     private float etapaTimer = 0f; // Contador para controlar cuándo cambiar de etapa.
 
@@ -25,19 +27,32 @@ public class CebadaControlSembrado : MonoBehaviour
     {
         etapa = 0;
         sembrado = false;
+        cocktador = 0;
         
     }
 
-    void FixedUpdate()
+    
+
+
+
+    void Update()
     {
         // Obtener los componentes de los GameObjects.
         Tile tileComponent = tile.GetComponent<Tile>();
         DragCebada dragCebadaComponent = draggedCebada.GetComponent<DragCebada>();
         WorldLight worldLightComponent = light.GetComponent<WorldLight>();
+        RebootEtapa rebootEtapaComponent = RebootEtapa.GetComponent<RebootEtapa>();
 
 
         // Incrementar el contador de etapa.
         etapaTimer += Time.deltaTime;
+
+        if (rebootEtapaComponent.reboot)
+        {
+            etapa = 0;
+            sembrado = false;
+            cocktador = 0;
+        }
 
         if (sembrado && worldLightComponent.running && etapa != 0) {
                 if (etapaTimer >= tiempoCambioEtapa) {
@@ -198,16 +213,7 @@ public class CebadaControlSembrado : MonoBehaviour
         //     StartCoroutine(CambiarEtapaConRetraso());
         // }
     }
-    // IEnumerator CambiarEtapaConRetraso()
-    // {
-    //     for (int i = 1; i <= 5; i++)
-    //     {   
-    //         etapa = i;
-    //         Debug.Log("etapa: "+i);
-    //         // Espera un segundo antes de continuar con el próximo número.
-    //         yield return new WaitForSeconds(0.6f);
-    //     }
-    // }
+
 
     void sound()
     {

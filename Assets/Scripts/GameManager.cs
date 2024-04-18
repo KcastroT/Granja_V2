@@ -24,8 +24,10 @@ public class GameManager : MonoBehaviour
     public GameObject timer;
 
     public GameObject tutorialPanel;
+    public GameObject VentaPanel;
 
-    private bool GameStarted = false;
+    public bool GameStarted = false;
+
 
     public bool TutorialActive = false;
 
@@ -44,6 +46,8 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        GameStarted = false;
+
         StartCoroutine(ShowPantallaInicioWithDelay());
         contadorDeDias = 0;
     }
@@ -86,6 +90,18 @@ public class GameManager : MonoBehaviour
     public void CargarPantalladeInicio()
     {
         pantallaInicio.SetActive(true);
+    }
+
+    public void PrenderVentas()
+    {
+        if (contadorDeDias > 0)
+        StartCoroutine(verVentanaPanel());
+    }
+
+    IEnumerator verVentanaPanel()  // Function to trigger a random event
+    {   
+        yield return new WaitForSeconds(3f);
+        VentaPanel.SetActive(true);
     }
 
     public void MostrarOpcionesPanel()

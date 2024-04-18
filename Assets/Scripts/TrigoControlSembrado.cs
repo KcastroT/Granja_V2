@@ -7,6 +7,8 @@ namespace WorldTime {
 public class TrigoControlSembrado : MonoBehaviour
 {
     public GameObject clock; // Referencia al GameObject que tiene el componente Timer.
+    public GameObject RebootEtapa;
+
     public int etapa = 0;
     private float etapaTimer = 0f; // Contador para controlar cuándo cambiar de etapa.
 
@@ -29,8 +31,11 @@ public class TrigoControlSembrado : MonoBehaviour
     {
         etapa = 0;
         sembrado = false;
+        cocktador = 0;
         
     }
+    
+
 
     void Update()
     {
@@ -38,17 +43,31 @@ public class TrigoControlSembrado : MonoBehaviour
         Tile tileComponent = tile.GetComponent<Tile>();
         DragTrigo dragTrigoComponent = draggedTrigo.GetComponent<DragTrigo>();
         WorldLight worldLightComponent = light.GetComponent<WorldLight>();
+        RebootEtapa rebootEtapaComponent = RebootEtapa.GetComponent<RebootEtapa>();
 
 
         // Incrementar el contador de etapa.
         etapaTimer += Time.deltaTime;
+
+        if (rebootEtapaComponent.reboot)
+        {
+            etapa = 0;
+            sembrado = false;
+            cocktador = 0;
+        }
 
         if (sembrado && worldLightComponent.running && etapa != 0) {
                 if (etapaTimer >= tiempoCambioEtapa) {
                     etapaTimer = 0f; // Reiniciar el contador de tiempo
                     etapa++; // Incrementar la etapa
                     if (etapa >= 5) {
-                        etapa = 5; // Mantener la etapa en 5 si llega a ese valor
+                        
+
+                            
+                        // Mantener la etapa en 5 si llega a ese valor a menos que se haya cosechado
+                        etapa = 5;
+
+
                     }
                 }
             }
@@ -202,17 +221,6 @@ public class TrigoControlSembrado : MonoBehaviour
         //     StartCoroutine(CambiarEtapaConRetraso());
         // }
     }
-
-    // IEnumerator CambiarEtapaConRetraso()
-    // {
-    //     for (int i = 1; i <= 5; i++)
-    //     {   
-    //         etapa = i;
-    //         Debug.Log("etapa: "+i);
-    //         // Espera un segundo antes de continuar con el próximo número.
-    //         yield return new WaitForSeconds(0.6f);
-    //     }
-    // }
 
     void sound()
     {
