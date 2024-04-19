@@ -24,6 +24,8 @@ namespace Contador
         public TextMeshProUGUI textoZanahoriaCosechado;
         public TextMeshProUGUI textoVentasTemporada;
 
+        private string modo="";
+
         public int contadorMaiz ; //Contador de maiz por poner en el campo
         public int contadorTrigo; //Contador de trigo por poner en el campo
         public int contadorCebada;  //Contador de cebada por poner en el campo
@@ -48,7 +50,7 @@ namespace Contador
 
         private int Ventas;//Dinero que se obtiene de las ventas
 
-        private float Interes;//Intereses con deuda  de los prestamos 
+        private float Interes=0;//Intereses con deuda  de los prestamos 
 
         private float iverqor=-1.29f;//Interes con deuda de verqor
         private float ibanco=-1.17f;//Interes con deuda de banco
@@ -58,7 +60,16 @@ namespace Contador
         private float cantidadbanco=350;//Cantidad de dinero prestado por banco
         private float cantidadcoyote=250;//Cantidad de dinero prestado por coyote
 
+        public TextMeshProUGUI textoModo;
+        public TextMeshProUGUI textoDineroPrestamo;
+        public TextMeshProUGUI textoInsumos;
+        public TextMeshProUGUI textoDineroNoticias;
 
+        public TextMeshProUGUI textoInteres;
+
+        public TextMeshProUGUI textoVentas;
+
+        public TextMeshProUGUI textoBalance;
 
 
 
@@ -67,6 +78,7 @@ namespace Contador
         {   
             dineroInicial = sistemaMoneda.moneda;
             insumos = 0;
+            c=0;
 
 
             
@@ -82,17 +94,21 @@ namespace Contador
         {
             GameManager gameManager = GameManager.GetComponent<GameManager>();
 
-            if(gameManager.GameStarted && c<=0){
+            if(gameManager.GameStarted && c==0){
                 if(gameManager.modoDeJuego=="Verqor"){
-                    Interes = cantidadverqor*iverqor;
+                    Interes = Mathf.FloorToInt(cantidadverqor * iverqor);
+                    modo = "Verqor";
                     c++;
                     Debug.Log("Interes verqor: "+Interes);
-                }else if(gameManager.modoDeJuego=="Banco"){
-                    Interes = cantidadbanco*ibanco;
+                }else if(gameManager.modoDeJuego=="Tradicional"){
+                    Interes = Mathf.FloorToInt(cantidadbanco*ibanco);
+
+                    modo = "Banco";
                     c++;
                     Debug.Log("Interes banco: "+Interes);
                 }else if(gameManager.modoDeJuego=="Coyote"){
-                    Interes = cantidadcoyote*icoyote;
+                    Interes = Mathf.FloorToInt(cantidadcoyote*icoyote);
+                    modo = "Coyote";
                     c++;
                     Debug.Log("Interes coyote: "+Interes);
                 }
@@ -150,6 +166,17 @@ namespace Contador
             TrigoCosechado = 0;
             CebadaCosechado = 0;
             ZanahoriaCosechado = 0;
+        }
+        public void CuentaFinal(){
+            textoModo.text = modo;
+            textoDineroPrestamo.text = dineroInicial.ToString();
+            textoInsumos.text = insumos.ToString();
+            textoDineroNoticias.text = sistemaMoneda.dineroNoticias.ToString();
+            textoInteres.text = Interes.ToString();
+            textoVentas.text = Ventas.ToString();
+            textoBalance.text = sistemaMoneda.moneda.ToString();
+
+            Debug.Log("Modo de juego: "+modo+" Prestamo: "+dineroInicial+" Insumos: "+insumos+" Bono de pregunta"+0+" Noticias: "+sistemaMoneda.dineroNoticias+" Intereses: "+Interes+" Ventas: "+Ventas);
         }
 
 

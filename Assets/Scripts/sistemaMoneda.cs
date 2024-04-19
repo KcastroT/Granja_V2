@@ -26,12 +26,11 @@ public class sistemaMoneda : MonoBehaviour
         ActualizarTextoMoneda();
     }
 
-    public void RestarBB(){
-        int monedaspasadas = moneda;//variable que usaremos solo para imprimir la transaccion de monedas
-        moneda -= 35;
-        dineroNoticias -= 35;
+    public void AñadirMonedas(int cantidad)
+    {
+        Debug.Log("Añadiendo " + cantidad + " monedas.");
+        moneda += cantidad;
         ActualizarTextoMoneda();
-        Debug.Log("Transaccion: $"+monedaspasadas+" - $35 = $"+moneda);
     }
     public void RestarNarcos(){
         int monedaspasadas = moneda;//variable que usaremos solo para imprimir la transaccion de monedas

@@ -24,7 +24,10 @@ public class GameManager : MonoBehaviour
     public GameObject timer;
 
     public GameObject tutorialPanel;
+
     public GameObject VentaPanel;
+
+    public GameObject VentaBalance;
 
     public bool GameStarted = false;
 
@@ -82,7 +85,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SacarNoticia()  // Function to trigger a random event
     {   
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(4f);
         eventManager.SetActive(true);
         eventManager.GetComponent<EventManager>().TriggerRandomEvent();
     }
@@ -90,6 +93,21 @@ public class GameManager : MonoBehaviour
     public void CargarPantalladeInicio()
     {
         pantallaInicio.SetActive(true);
+    }
+
+    public void PrenderBalance()
+    {   
+        if (contadorDeDias >= 3){
+            StartCoroutine(verVentanaBalance());
+            contadorDeDias = 0;
+        }
+        
+    }
+    IEnumerator verVentanaBalance()  // Function to trigger a random event
+    {   
+        yield return new WaitForSeconds(0.5f);
+        VentaBalance.SetActive(true);
+        
     }
 
     public void PrenderVentas()
@@ -100,7 +118,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator verVentanaPanel()  // Function to trigger a random event
     {   
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.5f);
         VentaPanel.SetActive(true);
     }
 
