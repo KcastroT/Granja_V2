@@ -60,6 +60,36 @@ public class sistemaMoneda : MonoBehaviour
         ActualizarTextoMoneda();
     }
 
+    public void SumarConCondicion(int cantidad)
+    {
+        string modoDeJuego = GameManager.Instance.modoDeJuego; // Correct access of a static member
+        if(modoDeJuego == "Verqor"){
+            moneda += cantidad;
+            ActualizarTextoMoneda();
+        }else if(modoDeJuego == "Tradicional"){
+            moneda += (int) (cantidad * 0.5);
+            ActualizarTextoMoneda();
+        }else{
+            moneda += 0;
+            ActualizarTextoMoneda();
+        }
+    }
+
+    public void RestarConCondicion(int cantidad)
+    {
+        string modoDeJuego = GameManager.Instance.modoDeJuego; // Correct access of a static member
+
+        if(modoDeJuego == "Verqor"){
+            moneda -= cantidad;
+            ActualizarTextoMoneda();
+        }else if(modoDeJuego == "Tradicional"){
+            moneda -= (int) (cantidad * 0.5);
+            ActualizarTextoMoneda();
+        }else{
+            moneda -= (int) (cantidad * 0.25);
+            ActualizarTextoMoneda();
+        }
+    }
 
     void ActualizarTextoMoneda()
     {

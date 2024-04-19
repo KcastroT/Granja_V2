@@ -162,4 +162,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+   public string GetModoDeJuego()
+   {
+       return modoDeJuego;
+   }
 }
