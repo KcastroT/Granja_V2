@@ -141,25 +141,25 @@ public class GameManager : MonoBehaviour
 
     // Supongamos que esta es tu función ToggleHUD
     public void ToggleHUD(bool show, bool interactable = false)
-{
-    // Obtain the CanvasGroup component from the HUD
-    CanvasGroup hudCanvasGroup = HUD.GetComponent<CanvasGroup>();
+    {
+        // Obtain the CanvasGroup component from the HUD
+        CanvasGroup hudCanvasGroup = HUD.GetComponent<CanvasGroup>();
 
-    if (show)
-    {
-        // Make the HUD visible
-        hudCanvasGroup.alpha = 1;
-        // Set interaction properties based on the parameter
-        hudCanvasGroup.blocksRaycasts = interactable;
-        hudCanvasGroup.interactable = interactable;
+        if (show)
+        {
+            // Make the HUD visible
+            hudCanvasGroup.alpha = 1;
+            // Set interaction properties based on the parameter
+            hudCanvasGroup.blocksRaycasts = interactable;
+            hudCanvasGroup.interactable = interactable;
+        }
+        else
+        {
+            // Hide the HUD
+            hudCanvasGroup.alpha = 0;
+            hudCanvasGroup.blocksRaycasts = false;
+            hudCanvasGroup.interactable = false;
+        }
     }
-    else
-    {
-        // Hide the HUD
-        hudCanvasGroup.alpha = 0;
-        hudCanvasGroup.blocksRaycasts = false;
-        hudCanvasGroup.interactable = false;
-    }
-}
 
 }

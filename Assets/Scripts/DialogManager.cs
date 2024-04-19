@@ -34,6 +34,8 @@ public class DialogManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
 
+        FindObjectOfType<GameManager>().ToggleHUD(true,false);
+
         DisplayNextSentence();
     }
 
@@ -74,6 +76,7 @@ public class DialogManager : MonoBehaviour
     {   
         animator.SetBool("IsOpen", false);
         Debug.Log("Fin de la conversación");
+        FindObjectOfType<GameManager>().ToggleHUD(true,true);
     }
 
     private void Update()
