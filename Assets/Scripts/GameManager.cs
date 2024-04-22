@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
     // Este script contiene todas las variables y funciones globales del juego
@@ -13,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject pantallaInicio;
     public GameObject opcionesPanel;
     public TMP_InputField nameInputField; // TMP_InputField instead of InputField
+    public sistemaMoneda moneda;
 
     public GameObject HUD;
     public string nombre; // Variable to store the input name
@@ -88,6 +88,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(4f);
         eventManager.SetActive(true);
         eventManager.GetComponent<EventManager>().TriggerRandomEvent();
+        if(moneda.BarraDeuda.value >= 300)
+        {
+            PrenderBalanceunitario();
+        }
     }
 
     public void CargarPantalladeInicio()
@@ -102,6 +106,14 @@ public class GameManager : MonoBehaviour
             contadorDeDias = 0;
         }
         
+    }
+
+    public void PrenderBalanceunitario()
+    {
+        if(moneda.BarraDeuda.value >= 300){
+            StartCoroutine(verVentanaBalance());
+        }
+
     }
     IEnumerator verVentanaBalance()  // Function to trigger a random event
     {   
@@ -160,6 +172,11 @@ public class GameManager : MonoBehaviour
             hudCanvasGroup.blocksRaycasts = false;
             hudCanvasGroup.interactable = false;
         }
+    }
+
+    public void NuevoJuego()
+    {
+        SceneManager.LoadScene("Game");
     }
 
    public string GetModoDeJuego()
