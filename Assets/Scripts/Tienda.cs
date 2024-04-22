@@ -7,14 +7,6 @@ public class Tienda : MonoBehaviour
     [SerializeField]
     private GameObject MenuTienda;
     
-    private void Update()
-    {
-        // Detectar si se presiona la tecla Escape
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            CloseTienda();
-        }
-    }
 
     public void OpenTienda()
     {
