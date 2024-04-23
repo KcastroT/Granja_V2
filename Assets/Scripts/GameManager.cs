@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     public void PrenderBalance()
     {   
-        if (contadorDeDias >= 3){
+        if (contadorDeDias >= 8){
             StartCoroutine(verVentanaBalance());
             contadorDeDias = 0;
         }

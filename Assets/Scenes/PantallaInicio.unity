@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_text: Regresar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d8209ae9b9fe49828ac21e2c8b751b8, type: 2}
-  m_sharedMaterial: {fileID: -897740812772985929, guid: 6944b4cce9cfe4e17b4c6bd7faa7e303, type: 2}
+  m_sharedMaterial: {fileID: -3756053153720232104, guid: 4d8209ae9b9fe49828ac21e2c8b751b8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2807,7 +2807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
