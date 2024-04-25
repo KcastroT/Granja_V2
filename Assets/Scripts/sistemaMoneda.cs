@@ -22,6 +22,8 @@ public class sistemaMoneda : MonoBehaviour
 
         if (textoMoneda != null)
             ActualizarTextoMoneda();
+        ActualizarSlider();
+        ActualizarSlider();
 
         if (BarraDeuda != null)
         {
@@ -46,6 +48,7 @@ public class sistemaMoneda : MonoBehaviour
         Debug.Log("Añadiendo " + cantidad + " monedas.");
         moneda += cantidad;
         ActualizarTextoMoneda();
+        ActualizarSlider();
     }
     public void RestarNarcos()
     {
@@ -63,6 +66,7 @@ public class sistemaMoneda : MonoBehaviour
         moneda += 30;
         dineroNoticias += 30;
         ActualizarTextoMoneda();
+        ActualizarSlider();
         Debug.Log("Transaccion: $" + monedaspasadas + " + $35 = $" + moneda);
     }
     public void RestarSequia()
@@ -80,6 +84,7 @@ public class sistemaMoneda : MonoBehaviour
     {
         moneda += cantidad;
         ActualizarTextoMoneda();
+        ActualizarSlider();
     }
 
     public void SumarConCondicion(int cantidad)

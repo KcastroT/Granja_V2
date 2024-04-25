@@ -11,11 +11,20 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameObject pantallaInicio;
     public GameObject opcionesPanel;
-    public TMP_InputField nameInputField; // TMP_InputField instead of InputField
+    public TMP_InputField nameInputField; // Nombre del jugador
+    public TMP_InputField YearInputField; //Año de nacimiento
+    public TMP_InputField emailInputField;
+
+    public GameObject musicaFondo;
+    public GameObject musicaAmbiente;
+
+
     public sistemaMoneda moneda;
 
     public GameObject HUD;
     public string nombre; // Variable to store the input name
+    public string año; // Variable to store the input year
+    public string email; // Variable to store the input email
 
     public string modoDeJuego;
 
@@ -68,6 +77,10 @@ public class GameManager : MonoBehaviour
         CargarPantalladeInicio();
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         nombre = nameInputField.text;
+        // año = YearInputField.text;
+        // email = emailInputField.text;
+        musicaAmbiente.GetComponent<AudioSource>().Play();
+        musicaFondo.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(1.5f);
         MostrarOpcionesPanel();
         yield return new WaitUntil(() => GameStarted == true);
