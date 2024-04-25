@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
     public bool PreguntaActive = false;
 
     public GameObject eventManager;
+
+    public GameObject gameToDB;
+
     private void Awake()
     {
         if (Instance == null)
@@ -76,7 +79,6 @@ public class GameManager : MonoBehaviour
         // Wait for tutorial to finish
         ToggleHUD(true, true);  // Make HUD interactable again
         timer.SetActive(true);
-        
     }
 
     public void AumentoDeDias()
@@ -84,6 +86,7 @@ public class GameManager : MonoBehaviour
         contadorDeDias++;
         print("Día " + contadorDeDias);
         StartCoroutine(SacarPregunta());
+        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadUser(nombre, "beats ", "beats ", "beats ", "beats ", "beats "));
     }
 
     public void OnAnswerButtonClicked()
