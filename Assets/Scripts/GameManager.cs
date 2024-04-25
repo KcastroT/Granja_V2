@@ -29,10 +29,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject VentaBalance;
 
+    public GameObject Pregunta;
+
     public bool GameStarted = false;
 
 
     public bool TutorialActive = false;
+    public bool PreguntaActive = false;
 
     public GameObject eventManager;
     private void Awake()
@@ -80,18 +83,31 @@ public class GameManager : MonoBehaviour
     {
         contadorDeDias++;
         print("Día " + contadorDeDias);
-        StartCoroutine(SacarNoticia());
+        StartCoroutine(SacarPregunta());
     }
 
+    public void OnAnswerButtonClicked()
+    {
+        // Deactivate the Pregunta game object
+        Pregunta.SetActive(false);
+        // Call the SacarNoticia coroutine
+        StartCoroutine(SacarNoticia());
+    }
     IEnumerator SacarNoticia()  // Function to trigger a random event
     {   
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
         eventManager.SetActive(true);
         eventManager.GetComponent<EventManager>().TriggerRandomEvent();
         if(moneda.BarraDeuda.value >= 300)
         {
             PrenderBalanceunitario();
         }
+    }
+
+    IEnumerator SacarPregunta(){
+        yield return new WaitForSeconds(4f);
+        Pregunta.SetActive(true);
+        FindObjectOfType<GameManager>().ToggleHUD(true,false);
     }
 
     public void CargarPantalladeInicio()

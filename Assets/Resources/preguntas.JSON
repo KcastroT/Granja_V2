@@ -1,0 +1,74 @@
+{
+    "preguntas": [
+      {
+        "pregunta": "En cuánto tiempo puedo obtener mi crédito después de solicitarlo a Verqor?",
+        "opciones": [
+          "24 horas",
+          "menos de 72 horas",
+          "48 horas",
+          "menos de 96 horas"
+        ],
+        "respuesta_correcta": "menos de 72 horas"
+      },
+      {
+        "pregunta": "Qué productos ofrece Verqor?",
+        "opciones": [
+          "Financiamiento de insumos",
+          "Macrotúneles y sistemas de riego",
+          "Venta de insumos agrícolas",
+          "Todas las anteriores"
+        ],
+        "respuesta_correcta": "Todas las anteriores"
+      },
+      {
+        "pregunta": "Cuál es el monto mínimo y máximo de financiamiento?",
+        "opciones": [
+          "$50,000 hasta $500,000",
+          "$120,000 hasta $1,000,000",
+          "$250,000 hasta $5,000,000",
+          "$200,000 hasta $2,000,000"
+        ],
+        "respuesta_correcta": "$250,000 hasta $5,000,000"
+      },
+      {
+        "pregunta": "Qué documentación requiero para tramitar un financiamiento?",
+        "opciones": [
+          "INE",
+          "Comprobante de domicilio",
+          "Estar dado de alta en el SAT como persona física o moral",
+          "Todas las anteriores"
+        ],
+        "respuesta_correcta": "Todas las anteriores"
+      },
+      {
+        "pregunta": "Qué tipo de financiamiento otorga Verqor?",
+        "opciones": [
+          "Informal",
+          "Formal",
+          "Fintech",
+          "Ninguna de las anteriores"
+        ],
+        "respuesta_correcta": "Fintech"
+      },
+      {
+        "pregunta": "Verqor me da un seguro agrícola?",
+        "opciones": [
+          "Sí, es obligatorio contratarlo",
+          "No por que es un financiamiento informal",
+          "Sí, aunque no es necesario contratarlo",
+          "Ninguna de las anteriores"
+        ],
+        "respuesta_correcta": "Sí, es obligatorio contratarlo"
+      },
+      {
+        "pregunta": "Para qué sirve el seguro agrícola?",
+        "opciones": [
+          "Para poder vender mejor mis cultivos",
+          "Para proteger los cultivos de cualquier imprevisto",
+          "Para que les pongan fertilizantes",
+          "Ninguna de las anteriores"
+        ],
+        "respuesta_correcta": "Para proteger los cultivos de cualquier imprevisto"
+      }
+    ]
+  }
