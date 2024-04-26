@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject pantallaInicio;
     public GameObject opcionesPanel;
     public TMP_InputField nameInputField; // Nombre del jugador
+    public TMP_InputField apellidoInputField; // Apellido del jugador
     public TMP_InputField YearInputField; //Año de nacimiento
     public TMP_InputField emailInputField;
 
@@ -23,8 +24,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject HUD;
     public string nombre; // Variable to store the input name
+    public string apelllido; // Variable to store the input last name
     public string año; // Variable to store the input year
     public string email; // Variable to store the input email
+
 
     public string modoDeJuego;
 
@@ -77,8 +80,9 @@ public class GameManager : MonoBehaviour
         CargarPantalladeInicio();
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         nombre = nameInputField.text;
-        // año = YearInputField.text;
-        // email = emailInputField.text;
+        apelllido = apellidoInputField.text;
+        año = YearInputField.text;
+        email = emailInputField.text;
         musicaAmbiente.GetComponent<AudioSource>().Play();
         musicaFondo.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(1.5f);
@@ -99,7 +103,7 @@ public class GameManager : MonoBehaviour
         contadorDeDias++;
         print("Día " + contadorDeDias);
         StartCoroutine(SacarPregunta());
-        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadUser(nombre, "beats ", "beats ", "beats ", "beats ", "beats "));
+        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadUser(nombre, apelllido, email, "-.", año, "-."));
     }
 
     public void OnAnswerButtonClicked()

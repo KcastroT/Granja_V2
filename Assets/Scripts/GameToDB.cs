@@ -35,6 +35,9 @@ public class GameToDB : MonoBehaviour
         public string contenido;
         public string is_correct;
     }
+    //como defino el url como una variable de entorno
+
+    private string url="http://35.169.14.147:8081";
 
 
 
@@ -53,10 +56,14 @@ public class GameToDB : MonoBehaviour
 
     Debug.Log(json);
 
-    using (UnityWebRequest www = UnityWebRequest.Post("http://44.222.38.209:8080/usuarios", json, "application/json"))
+    using (UnityWebRequest www = UnityWebRequest.Post(url+"/usuarios", json, "application/json"))
     {
         yield return www.SendWebRequest();
         HandleResponse(www);
+        //el api regresa un json con el id del usuario, quieor imrpimir solo el ID en la consola
+
+        Debug.Log(www.downloadHandler.text);
+        
     }
 }
 
