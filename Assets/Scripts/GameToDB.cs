@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Collections.Generic;
+
+
 
 public class GameToDB : MonoBehaviour
 {
@@ -44,7 +47,7 @@ public class GameToDB : MonoBehaviour
 
 
     public IEnumerator UploadUser(string _nombre, string _apellido, string _correo, string _contrasena, string _anio_nacimiento, string _genero)
-{
+    {
     User user;
     user.nombre = _nombre;
     user.apellido = _apellido;
@@ -55,18 +58,35 @@ public class GameToDB : MonoBehaviour
     string json = JsonUtility.ToJson(user);
 
     Debug.Log(json);
+    
+    UnityWebRequest request = UnityWebRequest.Post(url+"/usuarios", json, "application/json");
+    yield return request.SendWebRequest();
 
-    using (UnityWebRequest www = UnityWebRequest.Post(url+"/usuarios", json, "application/json"))
-    {
-        yield return www.SendWebRequest();
-        HandleResponse(www);
-        //el api regresa un json con el id del usuario, quieor imrpimir solo el ID en la consola
-
-        Debug.Log(www.downloadHandler.text);
-        
+    //Procesa la respuesta del servidor
+    if (request.result == UnityWebRequest.Result.Success) {
+    try {
+        ApiResponse response = JsonUtility.FromJson<ApiResponse>(request.downloadHandler.text);
+        //Si la respuesta es exitosa, guarda el nombre de usuario y el ID de usuario 
+        //En todas los demas casos o errores marca el mensaje incorrecto
+        if (response.success) {
+            UserDataManager.Instance.NombreUsuario = user.nombre;
+            UserDataManager.Instance.ApellidoUsuario = user.apellido;
+            UserDataManager.Instance.AñoNacimientoUsuario = user.anio_nacimiento;
+            UserDataManager.Instance.EmailUsuario = user.correo;
+            UserDataManager.Instance.IDUsuario = response.insertId.ToString();
+            Debug.Log("Usuario registrado con ID: " + response.insertId);
+        } else {
+            Debug.LogError("Error en la API: " + response.error);
+        }
+    } catch (System.Exception ex) {
+        Debug.LogError("Error al procesar la respuesta: " + ex.Message);
     }
-}
 
+    }
+    
+    }
+
+    //se manda hasta el final del juego
     public IEnumerator UploadGame(int _idUsuario, string _financiamiento, int _puntaje)
     {
         Game game;
@@ -82,6 +102,7 @@ public class GameToDB : MonoBehaviour
         }
     }
 
+    
     public IEnumerator UploadQuestion(int _idUsuario, int _idPregunta, string _contenido)
     {
         Question question;
@@ -122,5 +143,11 @@ public class GameToDB : MonoBehaviour
         {
             Debug.Log("Form upload complete!");
         }
+    }
+    [System.Serializable] //Clase para recibir la respuesta del servidor
+    public class ApiResponse {
+    public bool success;
+    public int insertId;
+    public string error;
     }
 }

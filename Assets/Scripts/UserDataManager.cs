@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class UserDataManager : MonoBehaviour
+{
+    public static UserDataManager Instance; // Singleton pattern
+
+    public string NombreUsuario;
+    public string ApellidoUsuario;
+    public string AñoNacimientoUsuario;
+    public string EmailUsuario;
+    public string GeneroUsuario;
+    public string IDUsuario; // Asegúrate de obtener y asignar este valor correctamente según tu lógica
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Hace que este objeto no se destruya al cargar una nueva escena
+        }
+        else
+        {
+            Destroy(gameObject); // Destruye cualquier duplicado que se cree en nuevas escenas
+        }
+    }
+}

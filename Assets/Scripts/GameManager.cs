@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public TMP_InputField apellidoInputField; // Apellido del jugador
     public TMP_InputField YearInputField; //Año de nacimiento
     public TMP_InputField emailInputField;
+    public TMP_InputField generoInputField;
 
     public GameObject musicaFondo;
     public GameObject musicaAmbiente;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     public string apelllido; // Variable to store the input last name
     public string año; // Variable to store the input year
     public string email; // Variable to store the input email
+    public string genero; // Variable to store
 
 
     public string modoDeJuego;
@@ -78,11 +80,20 @@ public class GameManager : MonoBehaviour
         ToggleHUD(false);
         yield return new WaitForSeconds(1.5f);
         CargarPantalladeInicio();
+        yield return new WaitUntil(() => 
+            !string.IsNullOrEmpty(nameInputField.text) && 
+            !string.IsNullOrEmpty(apellidoInputField.text) && 
+            !string.IsNullOrEmpty(YearInputField.text) && 
+            !string.IsNullOrEmpty(emailInputField.text)&&
+            !string.IsNullOrEmpty(generoInputField.text)
+        );
+        Debug.Log("Todos los campos han sido llenados correctamente.");
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         nombre = nameInputField.text;
         apelllido = apellidoInputField.text;
         año = YearInputField.text;
         email = emailInputField.text;
+        genero = generoInputField.text;
         musicaAmbiente.GetComponent<AudioSource>().Play();
         musicaFondo.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(1.5f);
@@ -103,7 +114,7 @@ public class GameManager : MonoBehaviour
         contadorDeDias++;
         print("Día " + contadorDeDias);
         StartCoroutine(SacarPregunta());
-        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadUser(nombre, apelllido, email, "-.", año, "-."));
+        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadUser(nombre, apelllido, email, "-.", año, genero));
     }
 
     public void OnAnswerButtonClicked()
