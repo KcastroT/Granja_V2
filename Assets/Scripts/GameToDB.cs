@@ -8,6 +8,8 @@ using System.Collections.Generic;
 public class GameToDB : MonoBehaviour
 {
 
+    public int userID;
+
     struct User
     {
         public string nombre;
@@ -40,7 +42,7 @@ public class GameToDB : MonoBehaviour
     }
     //como defino el url como una variable de entorno
 
-    private string url="http://35.169.14.147:8081";
+    private string url="http://44.222.38.209:8080";
 
 
 
@@ -66,14 +68,24 @@ public class GameToDB : MonoBehaviour
     if (request.result == UnityWebRequest.Result.Success) {
     try {
         ApiResponse response = JsonUtility.FromJson<ApiResponse>(request.downloadHandler.text);
+        Debug.Log("Response text: " + request.downloadHandler.text);
         //Si la respuesta es exitosa, guarda el nombre de usuario y el ID de usuario 
         //En todas los demas casos o errores marca el mensaje incorrecto
+        Debug.Log("Success:" + response.success +
+                  "\nInsert ID:" + response.insertId +
+                  "\nUserDataManager Instance: " + UserDataManager.Instance);
+
         if (response.success) {
+            UserDataManager.Instance = new UserDataManager();
+            UserDataManager.Instance.IDUsuario = response.insertId.ToString();
             UserDataManager.Instance.NombreUsuario = user.nombre;
             UserDataManager.Instance.ApellidoUsuario = user.apellido;
             UserDataManager.Instance.AñoNacimientoUsuario = user.anio_nacimiento;
             UserDataManager.Instance.EmailUsuario = user.correo;
-            UserDataManager.Instance.IDUsuario = response.insertId.ToString();
+            UserDataManager.Instance.GeneroUsuario = user.genero;
+            
+            userID = response.insertId;
+
             Debug.Log("Usuario registrado con ID: " + response.insertId);
         } else {
             Debug.LogError("Error en la API: " + response.error);
@@ -95,7 +107,7 @@ public class GameToDB : MonoBehaviour
         game.puntaje = _puntaje;
         string json = JsonUtility.ToJson(game);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://44.222.38.209:8080/", json, "application/json"))
+        using (UnityWebRequest www = UnityWebRequest.Post(url+"/partidas", json, "application/json"))
         {
             yield return www.SendWebRequest();
             HandleResponse(www);
@@ -111,7 +123,7 @@ public class GameToDB : MonoBehaviour
         question.contenido = _contenido;
         string json = JsonUtility.ToJson(question);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://44.222.38.209:8080/", json, "application/json"))
+        using (UnityWebRequest www = UnityWebRequest.Post(url+"/preguntas", json, "application/json"))
         {
             yield return www.SendWebRequest();
             HandleResponse(www);
@@ -126,7 +138,7 @@ public class GameToDB : MonoBehaviour
         answer.is_correct = _is_correct;
         string json = JsonUtility.ToJson(answer);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://44.222.38.209:8080/", json, "application/json"))
+        using (UnityWebRequest www = UnityWebRequest.Post(url+"/respuestas", json, "application/json"))
         {
             yield return www.SendWebRequest();
             HandleResponse(www);

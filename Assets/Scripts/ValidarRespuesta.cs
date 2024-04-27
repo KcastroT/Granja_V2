@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 public class ValidarRespuesta : MonoBehaviour
 {
@@ -15,10 +16,11 @@ public class ValidarRespuesta : MonoBehaviour
     public GameObject btn3;
     public GameObject btn4;
     private int correctAnswerIndex = 0;
+    string userAnswer;
     public bool ValidateAnswer(int n)
     {
         Pregunta currentPregunta = sistemaPregunta.GetCurrentPregunta();
-        string userAnswer = currentPregunta.opciones[n];
+        userAnswer = currentPregunta.opciones[n];
 
         for (int i = 0; i < 4; i++)
         {
@@ -33,6 +35,11 @@ public class ValidarRespuesta : MonoBehaviour
         bool isCorrect = userAnswer == currentPregunta.respuesta_correcta;
         
         return isCorrect;
+    }
+
+    public string SelectedAnswer()
+    {
+        return userAnswer;
     }
 
     IEnumerator ChangeQuestion()

@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
     public GameObject eventManager;
 
     public GameObject gameToDB;
+    public sistemaPregunta sistemaPregunta;
+    public ValidarRespuesta validarRespuesta;
 
     private void Awake()
     {
@@ -107,6 +109,7 @@ public class GameManager : MonoBehaviour
         // Wait for tutorial to finish
         ToggleHUD(true, true);  // Make HUD interactable again
         timer.SetActive(true);
+        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadUser(nombre, apelllido, email, "-.", año, genero));
     }
 
     public void AumentoDeDias()
@@ -114,13 +117,31 @@ public class GameManager : MonoBehaviour
         contadorDeDias++;
         print("Día " + contadorDeDias);
         StartCoroutine(SacarPregunta());
-        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadUser(nombre, apelllido, email, "-.", año, genero));
     }
 
     public void OnAnswerButtonClicked()
     {
         // Call the SacarNoticia coroutine
         StartCoroutine(DelayedSacarNoticia());
+
+
+        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadQuestion(
+            gameToDB.GetComponent<GameToDB>().userID,
+            sistemaPregunta.GetComponentIndex(),
+            sistemaPregunta.GetCurrentPregunta().pregunta));
+
+        Debug.Log("User ID:" + gameToDB.GetComponent<GameToDB>().userID + "\n" +
+            "QuestID: " + sistemaPregunta.GetComponentIndex() + "\n" +
+            "content: " + sistemaPregunta.GetCurrentPregunta().pregunta);
+
+        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadAnswer(
+            sistemaPregunta.GetComponentIndex(),
+            validarRespuesta.SelectedAnswer(),
+            validarRespuesta.ValidateAnswer(validarRespuesta.GetComponentIndex()) ? "1" : "0"));
+
+        Debug.Log("QuestID: " + sistemaPregunta.GetComponentIndex() + "\n" +
+            "content: " + validarRespuesta.SelectedAnswer() + "\n" +
+            "is_correct: " + (validarRespuesta.ValidateAnswer(validarRespuesta.GetComponentIndex()) ? "1" : "0"));  
     }
 
     IEnumerator DelayedSacarNoticia()
