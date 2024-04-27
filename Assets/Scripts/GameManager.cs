@@ -119,11 +119,21 @@ public class GameManager : MonoBehaviour
 
     public void OnAnswerButtonClicked()
     {
-        // Deactivate the Pregunta game object
-        Pregunta.SetActive(false);
         // Call the SacarNoticia coroutine
-        StartCoroutine(SacarNoticia());
+        StartCoroutine(DelayedSacarNoticia());
     }
+
+    IEnumerator DelayedSacarNoticia()
+{
+    // Wait for 2 seconds (or any other delay you want)
+    yield return new WaitForSeconds(2);
+    Pregunta.SetActive(false);
+
+    // Call the SacarNoticia coroutine
+    StartCoroutine(SacarNoticia());
+}
+
+
     IEnumerator SacarNoticia()  // Function to trigger a random event
     {   
         yield return new WaitForSeconds(1f);
