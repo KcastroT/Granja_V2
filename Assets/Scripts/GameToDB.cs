@@ -9,6 +9,7 @@ public class GameToDB : MonoBehaviour
 {
 
     public int userID;
+    public int questID;
 
     struct User
     {
@@ -30,7 +31,6 @@ public class GameToDB : MonoBehaviour
     struct Question
     {
         public int idUsuario;
-        public int idPregunta;
         public string contenido;
     }
 
@@ -38,7 +38,7 @@ public class GameToDB : MonoBehaviour
     {
         public int pregunta_idpregunta;
         public string contenido;
-        public string is_correct;
+        public bool is_correct;
     }
     //como defino el url como una variable de entorno
 
@@ -68,12 +68,12 @@ public class GameToDB : MonoBehaviour
     if (request.result == UnityWebRequest.Result.Success) {
     try {
         ApiResponse response = JsonUtility.FromJson<ApiResponse>(request.downloadHandler.text);
-        Debug.Log("Response text: " + request.downloadHandler.text);
+        /*Debug.Log("Response text: " + request.downloadHandler.text);*/
         //Si la respuesta es exitosa, guarda el nombre de usuario y el ID de usuario 
         //En todas los demas casos o errores marca el mensaje incorrecto
-        Debug.Log("Success:" + response.success +
+        /*Debug.Log("Success:" + response.success +
                   "\nInsert ID:" + response.insertId +
-                  "\nUserDataManager Instance: " + UserDataManager.Instance);
+                  "\nUserDataManager Instance: " + UserDataManager.Instance);*/
 
         if (response.success) {
             UserDataManager.Instance = new UserDataManager();
@@ -115,22 +115,42 @@ public class GameToDB : MonoBehaviour
     }
 
     
-    public IEnumerator UploadQuestion(int _idUsuario, int _idPregunta, string _contenido)
-    {
-        Question question;
-        question.idUsuario = _idUsuario;
-        question.idPregunta = _idPregunta;
-        question.contenido = _contenido;
-        string json = JsonUtility.ToJson(question);
+public IEnumerator UploadQuestion(int _idUsuario, string _contenido)
+{
+    Question question;
+    question.idUsuario = _idUsuario;
+    question.contenido = _contenido;
+    string json = JsonUtility.ToJson(question);
 
-        using (UnityWebRequest www = UnityWebRequest.Post(url+"/preguntas", json, "application/json"))
-        {
-            yield return www.SendWebRequest();
-            HandleResponse(www);
+    UnityWebRequest request = UnityWebRequest.Post(url+"/preguntas", json, "application/json");
+    yield return request.SendWebRequest();
+
+    //Procesa la respuesta del servidor
+    if (request.result == UnityWebRequest.Result.Success) {
+    try {
+        ApiResponse response = JsonUtility.FromJson<ApiResponse>(request.downloadHandler.text);
+        Debug.Log("Response text: " + request.downloadHandler.text);
+        //Si la respuesta es exitosa, guarda el nombre de usuario y el ID de usuario 
+        //En todas los demas casos o errores marca el mensaje incorrecto
+        Debug.Log("Success Pregunta:" + response.success +
+                  "\n Preguntaaaa ID:" + response.insertId);
+
+        if (response.success) {
+
+            questID = response.insertId;
+            Debug.Log("Pregunta registrado con ID: " + response.insertId +
+                      "Para usuario: " + UserDataManager.Instance.IDUsuario);
+        } else {
+            Debug.LogError("Error en la API: " + response.error);
         }
+    } catch (System.Exception ex) {
+        Debug.LogError("Error al procesar la respuesta: " + ex.Message);
     }
 
-    public IEnumerator UploadAnswer(int _pregunta_idpregunta, string _contenido, string _is_correct)
+    }
+}
+
+    public IEnumerator UploadAnswer(int _pregunta_idpregunta, string _contenido, bool _is_correct)
     {
         Answer answer;
         answer.pregunta_idpregunta = _pregunta_idpregunta;

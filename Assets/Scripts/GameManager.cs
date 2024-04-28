@@ -119,30 +119,41 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SacarPregunta());
     }
 
-    public void OnAnswerButtonClicked()
-    {
-        // Call the SacarNoticia coroutine
-        StartCoroutine(DelayedSacarNoticia());
+public void OnAnswerButtonClicked()
+{
+    // Call the SacarNoticia coroutine
+    StartCoroutine(DelayedSacarNoticia());
 
+    // Start the new coroutine
+    StartCoroutine(UploadAndLog());
+}
 
-        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadQuestion(
-            gameToDB.GetComponent<GameToDB>().userID,
-            sistemaPregunta.GetComponentIndex(),
-            sistemaPregunta.GetCurrentPregunta().pregunta));
+private IEnumerator UploadAndLog()
+{
+    // Start the UploadQuestion coroutine and wait for it to finish
+    yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadQuestion(
+        gameToDB.GetComponent<GameToDB>().userID,
+        sistemaPregunta.GetCurrentPregunta().pregunta));
 
-        Debug.Log("User ID:" + gameToDB.GetComponent<GameToDB>().userID + "\n" +
-            "QuestID: " + sistemaPregunta.GetComponentIndex() + "\n" +
-            "content: " + sistemaPregunta.GetCurrentPregunta().pregunta);
+    // Now that the UploadQuestion coroutine has finished, start the UploadAnswer coroutine and wait for it to finish
+    yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadAnswer(
+        gameToDB.GetComponent<GameToDB>().questID,
+        validarRespuesta.SelectedAnswer(),
+        validarRespuesta.IsCorrectAnswer()));
+    
+    /*yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadAnswer(
+        5,
+        "si mandaaaaaa",
+        false));*/
 
-        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadAnswer(
-            sistemaPregunta.GetComponentIndex(),
-            validarRespuesta.SelectedAnswer(),
-            validarRespuesta.ValidateAnswer(validarRespuesta.GetComponentIndex()) ? "1" : "0"));
+    // Now that the coroutines have finished, execute the debug logs
+    Debug.Log("PREGUNTA \n User ID:" + gameToDB.GetComponent<GameToDB>().userID + "\n" +
+              "content: " + sistemaPregunta.GetCurrentPregunta().pregunta);
 
-        Debug.Log("QuestID: " + sistemaPregunta.GetComponentIndex() + "\n" +
-            "content: " + validarRespuesta.SelectedAnswer() + "\n" +
-            "is_correct: " + (validarRespuesta.ValidateAnswer(validarRespuesta.GetComponentIndex()) ? "1" : "0"));  
-    }
+    Debug.Log("RESPUESTA \n QuestID: " + gameToDB.GetComponent<GameToDB>().questID + "\n" +
+        "content: " + validarRespuesta.SelectedAnswer() + "\n" +
+        "is_correct: " + validarRespuesta.IsCorrectAnswer());  
+}
 
     IEnumerator DelayedSacarNoticia()
 {
@@ -254,7 +265,13 @@ public class GameManager : MonoBehaviour
 
     public void NuevoJuego()
     {
+        StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadGame(
+             gameToDB.GetComponent<GameToDB>().userID,
+             modoDeJuego,
+             moneda.moneda
+        ));
         SceneManager.LoadScene("Game");
+        
     }
 
    public string GetModoDeJuego()

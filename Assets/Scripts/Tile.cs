@@ -20,7 +20,7 @@ public class Tile : MonoBehaviour {
 
     void OnMouseEnter() {
     _highlight.SetActive(true);
-    Debug.Log("Mouse enter"); 
+    //Debug.Log("Mouse enter"); 
     IsTouched=true;   
     }
 

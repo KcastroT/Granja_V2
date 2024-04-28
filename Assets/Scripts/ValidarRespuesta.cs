@@ -17,6 +17,7 @@ public class ValidarRespuesta : MonoBehaviour
     public GameObject btn4;
     private int correctAnswerIndex = 0;
     string userAnswer;
+    bool isCorrect = false;
     public bool ValidateAnswer(int n)
     {
         Pregunta currentPregunta = sistemaPregunta.GetCurrentPregunta();
@@ -32,8 +33,13 @@ public class ValidarRespuesta : MonoBehaviour
         }
 
 
-        bool isCorrect = userAnswer == currentPregunta.respuesta_correcta;
+        isCorrect = userAnswer == currentPregunta.respuesta_correcta;
         
+        return isCorrect;
+    }
+
+    public bool IsCorrectAnswer()
+    {
         return isCorrect;
     }
 
