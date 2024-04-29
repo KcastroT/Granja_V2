@@ -205,8 +205,7 @@ private IEnumerator UploadAndLog()
 
     public void PrenderBalance()
     {   
-        //cambiar de 2 a mas de 5 dias
-        if (contadorDeDias >= 2){
+        if (contadorDeDias >= 6){
             StartCoroutine(verVentanaBalance());
         }
         
