@@ -3,35 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class lluvia : MonoBehaviour
+{public GameObject lluviaobj;
+public GameObject sonidolluvia; // Asegúrate de que este objeto tenga un componente AudioSource con el clip de sonido de la lluvia
+private AudioSource sonido; // Para controlar la reproducción del sonido
+private float tiempotranscurrido = 0;
+public bool lluviaactiva = false;
+
+void Start()
 {
-    public GameObject lluviaobj;
-    public GameObject sonidolluvia; // Opcional: para reproducir un sonido de lluvia
-    private float tiempotranscurrido = 0;
-    public bool lluviaactiva = false;
+    // Obtén el componente AudioSource del objeto sonidolluvia
+    sonido = sonidolluvia.GetComponent<AudioSource>();
+}
 
-    public void ActivarLluvia()
-    {
-        lluviaactiva = true;
-    }
+public void ActivarLluvia()
+{
+    lluviaactiva = true;
+}
 
-    void Update()
+void Update()
+{
+    if (lluviaactiva)
     {
-        if (lluviaactiva)
+        if (tiempotranscurrido <= 5f)
         {
-            if (tiempotranscurrido <= 5f)
+            // Mientras el tiempo transcurrido sea <= 5 segundos, activar la lluvia y el sonido
+            lluviaobj.SetActive(true);
+            if (!sonido.isPlaying)
             {
-                // Mientras el tiempo transcurrido sea <= 3 segundos, activar la lluvia
-                lluviaobj.SetActive(true);
-                tiempotranscurrido += Time.deltaTime;
+                sonido.Play();
             }
-            else
+            tiempotranscurrido += Time.deltaTime;
+        }
+        else
+        {
+            // Después de 5 segundos, desactivar la lluvia y el sonido, y detener el temporizador
+            lluviaobj.SetActive(false);
+            if (sonido.isPlaying)
             {
-                // Después de 3 segundos, desactivar la lluvia y detener el temporizador
-                lluviaobj.SetActive(false);
-                lluviaactiva = false;
-                // Opcional: Resetear tiempotranscurrido si quieres que la lluvia pueda ser reactivada
-                tiempotranscurrido = 0;
+                sonido.Stop();
             }
+            lluviaactiva = false;
+            // Opcional: Resetear tiempotranscurrido si quieres que la lluvia pueda ser reactivada
+            tiempotranscurrido = 0;
         }
     }
+}
 }
