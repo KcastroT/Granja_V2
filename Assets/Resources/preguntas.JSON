@@ -1,7 +1,7 @@
 {
     "preguntas": [
       {
-        "pregunta": "En cuánto tiempo puedo obtener mi crédito después de solicitarlo a Verqor?",
+        "pregunta": "¿En cuánto tiempo puedo obtener mi crédito después de solicitarlo a Verqor?",
         "opciones": [
           "24 horas",
           "menos de 72 horas",
@@ -11,7 +11,7 @@
         "respuesta_correcta": "menos de 72 horas"
       },
       {
-        "pregunta": "Qué productos ofrece Verqor?",
+        "pregunta": "¿Qué productos ofrece Verqor?",
         "opciones": [
           "Financiamiento de insumos",
           "Macrotúneles y sistemas de riego",
@@ -21,7 +21,7 @@
         "respuesta_correcta": "Todas las anteriores"
       },
       {
-        "pregunta": "Cuál es el monto mínimo y máximo de financiamiento?",
+        "pregunta": "¿Cuál es el monto mínimo y máximo de financiamiento?",
         "opciones": [
           "$50,000 hasta $500,000",
           "$120,000 hasta $1,000,000",
@@ -31,7 +31,7 @@
         "respuesta_correcta": "$250,000 hasta $5,000,000"
       },
       {
-        "pregunta": "Qué documentación requiero para tramitar un financiamiento?",
+        "pregunta": "¿Qué documentación requiero para tramitar un financiamiento?",
         "opciones": [
           "INE",
           "Comprobante de domicilio",
@@ -41,7 +41,7 @@
         "respuesta_correcta": "Todas las anteriores"
       },
       {
-        "pregunta": "Qué tipo de financiamiento otorga Verqor?",
+        "pregunta": "¿Qué tipo de financiamiento otorga Verqor?",
         "opciones": [
           "Informal",
           "Formal",
