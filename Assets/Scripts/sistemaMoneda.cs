@@ -12,6 +12,8 @@ public class sistemaMoneda : MonoBehaviour
     public TextMeshProUGUI textoMoneda;
     public Slider BarraDeuda;
     public GameObject VentaBalance;
+    public TextMeshProUGUI MensajeEnding;
+    public GameObject FuegosArtificialesContainer;
 
 
     void Start()
@@ -22,8 +24,7 @@ public class sistemaMoneda : MonoBehaviour
 
         if (textoMoneda != null)
             ActualizarTextoMoneda();
-        ActualizarSlider();
-        ActualizarSlider();
+            ActualizarSlider();
 
         if (BarraDeuda != null)
         {
@@ -32,6 +33,25 @@ public class sistemaMoneda : MonoBehaviour
             BarraDeuda.value = Mathf.Max(0, -moneda);  // Valor inicial, asegurando que no sea negativo
         }
     }
+
+    public void ReiniciarDinero()
+    {
+        moneda = 50;
+        ActualizarTextoMoneda();
+        ActualizarSlider();
+    }
+
+    public void MostrarEnding(){
+        if (moneda < 0)
+        {
+            MensajeEnding.text= "Perdiste esta partida".ToString();
+        }else{
+            MensajeEnding.text= "Ganaste esta partida".ToString();
+            //activar Fuegos Artificiales
+
+        }
+    }
+
 
 
 
@@ -42,6 +62,7 @@ public class sistemaMoneda : MonoBehaviour
         ActualizarTextoMoneda();
         ActualizarSlider();
     }
+
 
     public void AñadirMonedas(int cantidad)
     {

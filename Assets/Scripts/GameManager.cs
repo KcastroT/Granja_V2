@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Este script contiene todas las variables y funciones globales del juego
+    // Este script contiene todas la mayoria variables y funciones globales del juego
 
     public static GameManager Instance { get; private set; }
     public GameObject pantallaInicio;
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject musicaFondo;
     public GameObject musicaAmbiente;
+
 
 
     public sistemaMoneda moneda;
@@ -44,6 +45,8 @@ public class GameManager : MonoBehaviour
     public GameObject VentaBalance;
 
     public GameObject Pregunta;
+
+    public bool ReiniciarConta = false;
 
     public bool GameStarted = false;
 
@@ -75,6 +78,22 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(ShowPantallaInicioWithDelay());
         contadorDeDias = 0;
+    }
+
+    IEnumerator IniciarSinTutorial()
+    {
+        contadorDeDias = 0;
+        ReiniciarConta = true; //reiniciar contadores (dinero = 0)
+        GameStarted = false;
+        TutorialActive = false;
+        timer.SetActive(true);
+        ToggleHUD(false, false);
+        MostrarOpcionesPanel();
+        //como hago para esperar a que eliggan el modo de juego
+        yield return new WaitUntil(() => GameStarted == true);
+        ToggleHUD(true, true);
+
+
     }
 
     IEnumerator ShowPantallaInicioWithDelay()
@@ -141,10 +160,6 @@ private IEnumerator UploadAndLog()
         validarRespuesta.SelectedAnswer(),
         validarRespuesta.IsCorrectAnswer()));
     
-    /*yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadAnswer(
-        5,
-        "si mandaaaaaa",
-        false));*/
 
     // Now that the coroutines have finished, execute the debug logs
     Debug.Log("PREGUNTA \n User ID:" + gameToDB.GetComponent<GameToDB>().userID + "\n" +
@@ -190,9 +205,9 @@ private IEnumerator UploadAndLog()
 
     public void PrenderBalance()
     {   
-        if (contadorDeDias >= 8){
+        //cambiar de 2 a mas de 5 dias
+        if (contadorDeDias >= 2){
             StartCoroutine(verVentanaBalance());
-            contadorDeDias = 0;
         }
         
     }
@@ -270,7 +285,8 @@ private IEnumerator UploadAndLog()
              modoDeJuego,
              moneda.moneda
         ));
-        SceneManager.LoadScene("Game");
+        //SceneManager.LoadScene("Game");
+        StartCoroutine(IniciarSinTutorial());
         
     }
 

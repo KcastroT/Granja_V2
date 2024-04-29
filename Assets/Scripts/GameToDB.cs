@@ -42,7 +42,7 @@ public class GameToDB : MonoBehaviour
     }
     //como defino el url como una variable de entorno
 
-    private string url="http://44.222.38.209:8080";
+    private string url="http://35.169.14.147:8080";
 
 
 

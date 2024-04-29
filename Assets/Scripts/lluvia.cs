@@ -5,7 +5,7 @@ using UnityEngine;
 public class lluvia : MonoBehaviour
 {
     public GameObject lluviaobj;
-    public GameObject sonidolluvia; // Opcional: si quieres reproducir un sonido de lluvia
+    public GameObject sonidolluvia; // Opcional: para reproducir un sonido de lluvia
     private float tiempotranscurrido = 0;
     public bool lluviaactiva = false;
 

@@ -24,6 +24,8 @@ namespace Contador
         public TextMeshProUGUI textoZanahoriaCosechado;
         public TextMeshProUGUI textoVentasTemporada;
 
+        public GameObject GameManagerReference;  //recibir booleano del game manager para reiniciar el contadores 
+
         private string modo="";
 
         public int contadorMaiz ; //Contador de maiz por poner en el campo
@@ -79,11 +81,6 @@ namespace Contador
             dineroInicial = sistemaMoneda.moneda;
             insumos = 0;
             c=0;
-
-
-            
-
-            
             IncrementarContadorMaiz();
             IncrementarContadorTrigo();
             IncrementarContadorCebada();
@@ -113,6 +110,42 @@ namespace Contador
                     Debug.Log("Interes coyote: "+Interes);
                 }
             }
+
+
+
+            if (gameManager.ReiniciarConta==true)
+            {
+                ReiniciarInventario();
+                gameManager.ReiniciarConta=false;
+            }
+        
+        }
+
+        public void ReiniciarInventario()
+        {
+            dineroInicial = sistemaMoneda.moneda;
+            sistemaMoneda.moneda = 50;//Dinero inicial, porfavor nunca quitar porque se bugea(tiene que ser la suma de todos los cultivos que puedas comprar junto)
+            contadorCebada = 0;
+            contadorMaiz = 0;
+            contadorTrigo = 0;
+            contadorZanahoria = 0;
+            IncrementarContadorCebada();
+            IncrementarContadorMaiz();
+            IncrementarContadorTrigo();
+            IncrementarContadorZanahoria();
+            Ventas = 0;
+            insumos = 0;
+            MaizCosechado = 0;
+            TrigoCosechado = 0;
+            CebadaCosechado = 0;
+            ZanahoriaCosechado = 0;
+            c=0;
+            Interes = 0;
+            ActualizarTextoContadorMaiz();
+            ActualizarTextoContadorTrigo();
+            ActualizarTextoContadorCebada();
+            ActualizarTextoContadorZanahoria();
+            
         }
 
         public void IncrementarContadorMaiz()
