@@ -138,6 +138,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SacarPregunta());
     }
 
+    public bool GetTutorialStatus()
+    {
+        return TutorialActive;
+    } 
 public void OnAnswerButtonClicked()
 {
     // Call the SacarNoticia coroutine
