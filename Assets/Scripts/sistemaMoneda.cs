@@ -110,7 +110,7 @@ public class sistemaMoneda : MonoBehaviour
 
     public void SumarConCondicion(int cantidad)
     {
-        string modoDeJuego = GameManager.Instance.modoDeJuego; // Correct access of a static member
+        string modoDeJuego = GameManager.Instance.modoDeJuego; 
         if (modoDeJuego == "Verqor")
         {
             moneda += cantidad;

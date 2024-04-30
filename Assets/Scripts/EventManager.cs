@@ -3,47 +3,41 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI; // Necessary for UI manipulation
 using TMPro;
+using SystemRandom = System.Random; // Alias for System.Random
 
 public class EventManager : MonoBehaviour
 {
     public List<GameEvent> possibleEvents;
     public DialogTrigger dialogTrigger; // Reference to the DialogTrigger
 
+    private SystemRandom random = new SystemRandom(); // Create a random object at the class level using the alias
+
     public void TriggerRandomEvent()
     {
-        
-        float totalWeight = 0f;
-        foreach (GameEvent gameEvent in possibleEvents)
+        // Check if there are any events
+        if (possibleEvents.Count == 0)
         {
-            totalWeight += gameEvent.probabilityWeight;
+            Debug.LogWarning("No events are available.");
+            return; // Exit if no events are available
         }
 
-        
-        if (possibleEvents.Count == 0 || totalWeight <= 0)
+        if (FindObjectOfType<GameManager>().GetTutorialStatus())
         {
-            Debug.LogWarning("No events are available or all events have a weight of zero.");
-            return;
+            Debug.LogWarning("Tutorial is active. No events will be triggered.");
+            return; // Exit if the tutorial is active
         }
 
-        
-        float randomPoint = Random.value * totalWeight;
-        float cumulativeWeight = 0f;
+        int randomIndex = random.Next(0, possibleEvents.Count); // Generate a random index using SystemRandom
+        Debug.Log("Random index: " + randomIndex);
+        // Retrieve the event using the random index
+        GameEvent selectedEvent = possibleEvents[randomIndex];
 
-       
-        foreach (GameEvent gameEvent in possibleEvents)
+        // Trigger the selected event and its dialog
+        if (selectedEvent.dialog != null)
         {
-            cumulativeWeight += gameEvent.probabilityWeight;
-            if (randomPoint <= cumulativeWeight)
-            {
-                
-                if (gameEvent.dialog != null)
-                {
-                    dialogTrigger.dialog = gameEvent.dialog; 
-                    dialogTrigger.TriggerDialog(); 
-                }
-                gameEvent.thisEvent.Invoke(); 
-                return;
-            }
+            dialogTrigger.dialog = selectedEvent.dialog; // Set the dialog in the trigger
+            dialogTrigger.TriggerDialog(); // Trigger the dialog
         }
+        selectedEvent.thisEvent.Invoke(); // Invoke the event
     }
 }
