@@ -29,7 +29,7 @@ public class sistemaMoneda : MonoBehaviour
         if (BarraDeuda != null)
         {
             BarraDeuda.minValue = 0;  // Valor mínimo
-            BarraDeuda.maxValue = 300;  // Valor máximo fijo
+            BarraDeuda.maxValue = 200;  // Valor máximo fijo
             BarraDeuda.value = Mathf.Max(0, -moneda);  // Valor inicial, asegurando que no sea negativo
         }
     }
@@ -74,8 +74,8 @@ public class sistemaMoneda : MonoBehaviour
     public void RestarNarcos()
     {
         int monedaspasadas = moneda;//variable que usaremos solo para imprimir la transaccion de monedas
-        moneda -= 20;
-        dineroNoticias -= 20;
+        moneda -= 150;
+        dineroNoticias -= 150;
         ActualizarTextoMoneda();
         ActualizarSlider();
 
@@ -84,8 +84,8 @@ public class sistemaMoneda : MonoBehaviour
     public void AñadirLluvia()
     {
         int monedaspasadas = moneda;//variable que usaremos solo para imprimir la transaccion de monedas
-        moneda += 30;
-        dineroNoticias += 30;
+        moneda += 40;
+        dineroNoticias += 40;
         ActualizarTextoMoneda();
         ActualizarSlider();
         Debug.Log("Transaccion: $" + monedaspasadas + " + $35 = $" + moneda);
@@ -93,8 +93,8 @@ public class sistemaMoneda : MonoBehaviour
     public void RestarSequia()
     {
         int monedaspasadas = moneda;//variable que usaremos solo para imprimir la transaccion de monedas
-        moneda -= 30;
-        dineroNoticias -= 30;
+        moneda -= 80;
+        dineroNoticias -= 80;
         ActualizarTextoMoneda();
         ActualizarSlider();
 
