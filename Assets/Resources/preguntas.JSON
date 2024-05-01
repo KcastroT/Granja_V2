@@ -69,6 +69,106 @@
           "Ninguna de las anteriores"
         ],
         "respuesta_correcta": "Para proteger los cultivos de cualquier imprevisto"
-      }
+      }, 
+      {
+        "pregunta": "¿Cuál de las siguientes prácticas es un principio fundamental de la agricultura regenerativa?",
+        "opciones": [
+          "Uso intensivo de agroquímicos",
+          "Monocultivos extensivos",
+          "Rotación de cultivos",
+          "Deforestación"
+        ],
+        "respuesta_correcta": "Rotación de cultivos"
+      },
+      {
+        "pregunta": "¿Qué método se utiliza comúnmente en la agricultura regenerativa para mejorar la salud del suelo?",
+        "opciones": [
+          "Labranza convencional",
+          "Uso de pesticidas sintéticos",
+          "Agricultura de conservación",
+          "Quema de rastrojos"
+        ],
+        "respuesta_correcta": "Agricultura de conservación"
+      },
+      {
+        "pregunta": "¿Cuál es uno de los beneficios ambientales de la agricultura regenerativa?",
+        "opciones": [
+          "Erosión del suelo",
+          "Pérdida de biodiversidad",
+          "Captura de carbono",
+          "Contaminación del agua"
+        ],
+        "respuesta_correcta": "Captura de carbono"
+      },
+      {
+        "pregunta": "¿Qué práctica ayuda a promover la biodiversidad en los sistemas agrícolas regenerativos?",
+        "opciones": [
+          "Eliminación de setos y bordes de campos",
+          "Uso exclusivo de cultivos de alto rendimiento",
+          "Creación de corredores ecológicos",
+          "Uso indiscriminado de pesticidas"
+        ],
+        "respuesta_correcta": "Creación de corredores ecológicos"
+      },
+      {
+        "pregunta": "¿Cuál de las siguientes estrategias ayuda a mejorar la resiliencia de los sistemas agrícolas frente al cambio climático?",
+        "opciones": [
+          "Dependencia exclusiva de cultivos sensibles al clima",
+          "Reducción de la materia orgánica en el suelo",
+          "Implementación de prácticas de manejo del agua",
+          "Quema periódica de rastrojos"
+        ],
+        "respuesta_correcta": "Implementación de prácticas de manejo del agua"
+      },
+      {
+        "pregunta": "¿Qué enfoque prioriza la agricultura regenerativa para la gestión del agua?",
+        "opciones": [
+          "Riego excesivo",
+          "Uso de sistemas de riego ineficientes",
+          "Captación y retención de agua en el suelo",
+          "Desviación de cursos de agua naturales"
+        ],
+        "respuesta_correcta": "Captación y retención de agua en el suelo"
+      },
+      {
+        "pregunta": "¿Qué aspecto del ciclo de nutrientes del suelo es fundamental en la agricultura regenerativa?",
+        "opciones": [
+          "Pérdida continua de nutrientes",
+          "Uso excesivo de fertilizantes sintéticos",
+          "Reciclaje de materia orgánica",
+          "Acidificación del suelo"
+        ],
+        "respuesta_correcta": "Reciclaje de materia orgánica"
+      },
+      {
+        "pregunta": "¿Cuál es un principio clave de la agricultura regenerativa en términos de manejo de pastizales?",
+        "opciones": [
+          "Sobrepastoreo intensivo",
+          "Rotación frecuente del ganado",
+          "Desbroce completo de la vegetación",
+          "Exclusión total del ganado"
+        ],
+        "respuesta_correcta": "Rotación frecuente del ganado"
+      },
+      {
+        "pregunta": "¿Qué práctica se considera perjudicial para la salud del suelo y se evita en la agricultura regenerativa?",
+        "opciones": [
+          "Compactación del suelo",
+          "Aumento de la materia orgánica",
+          "Promoción de la actividad microbiana",
+          "Uso de cultivos de cobertura"
+        ],
+        "respuesta_correcta": "Compactación del suelo"
+      },
+      {
+        "pregunta": "¿Qué objetivo busca la agricultura regenerativa en términos de la salud de los ecosistemas?",
+        "opciones": [
+          "Degradación continua del suelo",
+          "Reducción de la biodiversidad",
+          "Restauración y regeneración",
+          "Aumento de la erosión del suelo"
+        ],
+        "respuesta_correcta": "Restauración y regeneración"
+      }  
     ]
   }
