@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour
         timer.SetActive(true);
         ToggleHUD(false, false);
         MostrarOpcionesPanel();
-        //como hago para esperar a que eliggan el modo de juego
         yield return new WaitUntil(() => GameStarted == true);
         ToggleHUD(true, true);
 
@@ -142,47 +141,47 @@ public class GameManager : MonoBehaviour
     {
         return TutorialActive;
     } 
-public void OnAnswerButtonClicked()
-{
-    // Call the SacarNoticia coroutine
-    StartCoroutine(DelayedSacarNoticia());
+    public void OnAnswerButtonClicked()
+    {
+        // Call the SacarNoticia coroutine
+        StartCoroutine(DelayedSacarNoticia());
 
-    // Start the new coroutine
-    StartCoroutine(UploadAndLog());
-}
+        // Start the new coroutine
+        StartCoroutine(UploadAndLog());
+    }
 
-private IEnumerator UploadAndLog()
-{
-    // Start the UploadQuestion coroutine and wait for it to finish
-    yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadQuestion(
-        gameToDB.GetComponent<GameToDB>().userID,
-        sistemaPregunta.GetCurrentPregunta().pregunta));
+    private IEnumerator UploadAndLog()
+    {
+        // Start the UploadQuestion coroutine and wait for it to finish
+        yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadQuestion(
+            gameToDB.GetComponent<GameToDB>().userID,
+            sistemaPregunta.GetCurrentPregunta().pregunta));
 
-    // Now that the UploadQuestion coroutine has finished, start the UploadAnswer coroutine and wait for it to finish
-    yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadAnswer(
-        gameToDB.GetComponent<GameToDB>().questID,
-        validarRespuesta.SelectedAnswer(),
-        validarRespuesta.IsCorrectAnswer()));
-    
+        // Now that the UploadQuestion coroutine has finished, start the UploadAnswer coroutine and wait for it to finish
+        yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadAnswer(
+            gameToDB.GetComponent<GameToDB>().questID,
+            validarRespuesta.SelectedAnswer(),
+            validarRespuesta.IsCorrectAnswer()));
+        
 
-    // Now that the coroutines have finished, execute the debug logs
-    Debug.Log("PREGUNTA \n User ID:" + gameToDB.GetComponent<GameToDB>().userID + "\n" +
-              "content: " + sistemaPregunta.GetCurrentPregunta().pregunta);
+        // Now that the coroutines have finished, execute the debug logs
+        Debug.Log("PREGUNTA \n User ID:" + gameToDB.GetComponent<GameToDB>().userID + "\n" +
+                "content: " + sistemaPregunta.GetCurrentPregunta().pregunta);
 
-    Debug.Log("RESPUESTA \n QuestID: " + gameToDB.GetComponent<GameToDB>().questID + "\n" +
-        "content: " + validarRespuesta.SelectedAnswer() + "\n" +
-        "is_correct: " + validarRespuesta.IsCorrectAnswer());  
-}
+        Debug.Log("RESPUESTA \n QuestID: " + gameToDB.GetComponent<GameToDB>().questID + "\n" +
+            "content: " + validarRespuesta.SelectedAnswer() + "\n" +
+            "is_correct: " + validarRespuesta.IsCorrectAnswer());  
+    }
 
     IEnumerator DelayedSacarNoticia()
-{
-    // Wait for 2 seconds (or any other delay you want)
-    yield return new WaitForSeconds(2);
-    Pregunta.SetActive(false);
+    {
+        // Wait for 2 seconds (or any other delay you want)
+        yield return new WaitForSeconds(2);
+        Pregunta.SetActive(false);
 
-    // Call the SacarNoticia coroutine
-    StartCoroutine(SacarNoticia());
-}
+        // Call the SacarNoticia coroutine
+        StartCoroutine(SacarNoticia());
+    }
 
 
     IEnumerator SacarNoticia()  // Function to trigger a random event
@@ -288,13 +287,12 @@ private IEnumerator UploadAndLog()
              modoDeJuego,
              moneda.moneda
         ));
-        //SceneManager.LoadScene("Game");
         StartCoroutine(IniciarSinTutorial());
         
     }
 
-   public string GetModoDeJuego()
-   {
-       return modoDeJuego;
-   }
+    public string GetModoDeJuego()
+    {
+        return modoDeJuego;
+    }
 }
