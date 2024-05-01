@@ -112,7 +112,7 @@ Material:
     - _Surface: 1
     - _ZWrite: 0
     m_Colors:
-    - Color_207CF4A: {r: 14.754423, g: 14.754423, b: 14.754423, a: 1}
+    - Color_207CF4A: {r: 17.09665, g: 13.241011, b: 0, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}

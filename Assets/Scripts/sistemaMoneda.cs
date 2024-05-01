@@ -29,7 +29,7 @@ public class sistemaMoneda : MonoBehaviour
         if (BarraDeuda != null)
         {
             BarraDeuda.minValue = 0;  // Valor mínimo
-            BarraDeuda.maxValue = 200;  // Valor máximo fijo
+            BarraDeuda.maxValue = 300;  // Valor máximo fijo
             BarraDeuda.value = Mathf.Max(0, -moneda);  // Valor inicial, asegurando que no sea negativo
         }
     }
