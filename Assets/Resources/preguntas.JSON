@@ -4,11 +4,11 @@
         "pregunta": "¿En cuánto tiempo puedo obtener mi crédito después de solicitarlo a Verqor?",
         "opciones": [
           "24 horas",
-          "menos de 72 horas",
+          "Menos de 72 horas",
           "48 horas",
-          "menos de 96 horas"
+          "Menos de 96 horas"
         ],
-        "respuesta_correcta": "menos de 72 horas"
+        "respuesta_correcta": "Menos de 72 horas"
       },
       {
         "pregunta": "¿Qué productos ofrece Verqor?",
@@ -51,7 +51,7 @@
         "respuesta_correcta": "Fintech"
       },
       {
-        "pregunta": "Verqor me da un seguro agrícola?",
+        "pregunta": "¿Verqor me da un seguro agrícola?",
         "opciones": [
           "Sí, es obligatorio contratarlo",
           "No por que es un financiamiento informal",
@@ -61,7 +61,7 @@
         "respuesta_correcta": "Sí, es obligatorio contratarlo"
       },
       {
-        "pregunta": "Para qué sirve el seguro agrícola?",
+        "pregunta": "¿Para qué sirve el seguro agrícola?",
         "opciones": [
           "Para poder vender mejor mis cultivos",
           "Para proteger los cultivos de cualquier imprevisto",

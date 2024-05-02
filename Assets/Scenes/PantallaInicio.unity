@@ -753,9 +753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Creditos
-
-'
+  m_text: "Cr\xE9ditos\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 03e799cb842069b47bf9337a2d6a2833, type: 2}
   m_sharedMaterial: {fileID: -1573910412834467854, guid: 03e799cb842069b47bf9337a2d6a2833, type: 2}
@@ -2890,10 +2888,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Juego hecho por:\nJoel Vargas\nFabrizio Mart\xEDnez\nKevin Castro\nManuel
-    Olmos\nRoger Rendon"
+    Olmos\nRoger Rend\xF3n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4d8209ae9b9fe49828ac21e2c8b751b8, type: 2}
-  m_sharedMaterial: {fileID: -3756053153720232104, guid: 4d8209ae9b9fe49828ac21e2c8b751b8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aca17ca5b2478374eb9789646dfd7869, type: 2}
+  m_sharedMaterial: {fileID: -6616962551479587540, guid: aca17ca5b2478374eb9789646dfd7869, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
