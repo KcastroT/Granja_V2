@@ -138,7 +138,7 @@ namespace Contador
         public void ReiniciarInventario()
         {
             dineroInicial = sistemaMoneda.moneda;
-            sistemaMoneda.moneda = 50;//Dinero inicial, porfavor nunca quitar porque se bugea(tiene que ser la suma de todos los cultivos que puedas comprar junto)
+            sistemaMoneda.moneda = 59;//Dinero inicial, porfavor nunca quitar porque se bugea(tiene que ser la suma de todos los cultivos que puedas comprar junto)
             contadorCebada = 0;
             contadorMaiz = 0;
             contadorTrigo = 0;

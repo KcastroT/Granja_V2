@@ -18,6 +18,7 @@ public class sistemaMoneda : MonoBehaviour
 
     void Start()
     {
+        moneda = 0;
         dineroNoticias = 0;
         if (textoMoneda == null)
             textoMoneda = GetComponent<TextMeshProUGUI>();
