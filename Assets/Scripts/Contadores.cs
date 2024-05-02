@@ -18,6 +18,7 @@ namespace Contador
         public TextMeshProUGUI textoContadorCebada;
         public TextMeshProUGUI textoContadorZanahoria;
 
+
         public TextMeshProUGUI textoMaizCosechado;
         public TextMeshProUGUI textoTrigoCosechado;
         public TextMeshProUGUI textoCebadaCosechado;
@@ -38,10 +39,9 @@ namespace Contador
         private int CebadaCosechado; //Contador de cebada cosechado
         private int ZanahoriaCosechado; //Contador de zanahoria cosechado
 
-        private AudioSource sonidoCompra;
-        private AudioSource sonidodenegado;
-        public GameObject Buy_Sell;
-        public GameObject incorrecto;
+        public AudioSource sonidoCompra;
+        public AudioSource sonidoDenegado;
+
 
         public int precioMaiz = 25;
         public int precioTrigo = 10;
@@ -83,8 +83,8 @@ namespace Contador
 
         private void Start()
         {
-            sonidoCompra = Buy_Sell.GetComponent<AudioSource>();
-            sonidodenegado = incorrecto.GetComponent<AudioSource>();
+            sonidoCompra = sonidoCompra.GetComponent<AudioSource>();
+            sonidoDenegado = sonidoDenegado.GetComponent<AudioSource>();
 
             dineroInicial = sistemaMoneda.moneda;
             insumos = 0;
@@ -104,6 +104,8 @@ namespace Contador
                 if (gameManager.modoDeJuego == "Verqor")
                 {
                     Interes = Mathf.FloorToInt(cantidadverqor * iverqor);
+                    dineroInicial = Mathf.FloorToInt(cantidadverqor);
+                    textoDineroPrestamo.text = dineroInicial.ToString();
                     modo = "Verqor";
                     c++;
                     Debug.Log("Interes verqor: " + Interes);
@@ -111,6 +113,8 @@ namespace Contador
                 else if (gameManager.modoDeJuego == "Tradicional")
                 {
                     Interes = Mathf.FloorToInt(cantidadbanco * ibanco);
+                    dineroInicial = Mathf.FloorToInt(cantidadbanco);
+                    textoDineroPrestamo.text = dineroInicial.ToString();
 
                     modo = "Banco";
                     c++;
@@ -119,6 +123,8 @@ namespace Contador
                 else if (gameManager.modoDeJuego == "Coyote")
                 {
                     Interes = Mathf.FloorToInt(cantidadcoyote * icoyote);
+                    dineroInicial = Mathf.FloorToInt(cantidadcoyote);
+                    textoDineroPrestamo.text = dineroInicial.ToString();
                     modo = "Coyote";
                     c++;
                     Debug.Log("Interes coyote: " + Interes);
@@ -165,24 +171,38 @@ namespace Contador
         public void IncrementarContadorMaiz()
         {
             if (contadorMaiz < 9)
-            {
+            {   
+                if(c>0){
+                sonidoCompra.Play();
+                }
                 contadorMaiz++;
                 ActualizarTextoContadorMaiz();
                 DragMaiz.canDrag = true;
                 insumos += 20;
                 sistemaMoneda.RestarMonedas(20);
+            }   
+            else
+            {
+                sonidoDenegado.Play();
             }
         }
 
         public void IncrementarContadorZanahoria()
         {
             if (contadorZanahoria < 9)
-            {
+            {   
+                if(c>0){
+                sonidoCompra.Play();
+                }
+
                 contadorZanahoria++;
                 ActualizarTextoContadorZanahoria();
                 DragZanahoria.canDrag = true;
                 insumos += 15;
                 sistemaMoneda.RestarMonedas(15);
+            }else
+            {
+                sonidoDenegado.Play();
             }
         }
 
@@ -190,37 +210,49 @@ namespace Contador
         {
             if (contadorCebada < 9)
             {
+                if(c>0){
+                sonidoCompra.Play();
+                }
                 contadorCebada++;
                 ActualizarTextoContadorCebada();
                 DragCebada.canDrag = true;
-                insumos += 16;
+                insumos += 17;
 
-                sistemaMoneda.RestarMonedas(16);
+                sistemaMoneda.RestarMonedas(17);
+            }else
+            {
+                sonidoDenegado.Play();
             }
         }
         public void IncrementarContadorTrigo()
         {
             if (contadorTrigo < 9)
-            {
+            {   if(c>0){
+                sonidoCompra.Play();
+                }
                 contadorTrigo++;
                 ActualizarTextoContadorTrigo();
                 DragTrigo.canDrag = true;
                 insumos += 8;
 
                 sistemaMoneda.RestarMonedas(8);
+            }else
+            {
+                sonidoDenegado.Play();
             }
         }
 
 
         public void VenderCosecha()
         {
-            Ventas += MaizCosechado * precioMaiz + TrigoCosechado * precioTrigo + CebadaCosechado * precioCebada + ZanahoriaCosechado * precioZanahoria;
-            sistemaMoneda.SumarMonedas((MaizCosechado * precioMaiz + TrigoCosechado * precioTrigo + CebadaCosechado * precioCebada + ZanahoriaCosechado * precioZanahoria));
+            Ventas += (MaizCosechado * precioMaiz) + (TrigoCosechado * precioTrigo) + (CebadaCosechado * precioCebada) + (ZanahoriaCosechado * precioZanahoria);
+            textoVentas.text = Ventas.ToString();
+            sistemaMoneda.SumarMonedas((MaizCosechado * precioMaiz) + (TrigoCosechado * precioTrigo) + (CebadaCosechado * precioCebada) + (ZanahoriaCosechado * precioZanahoria));
             textoCebadaCosechado.text = CebadaCosechado.ToString();
             textoMaizCosechado.text = MaizCosechado.ToString();
             textoTrigoCosechado.text = TrigoCosechado.ToString();
             textoZanahoriaCosechado.text = ZanahoriaCosechado.ToString();
-            textoVentasTemporada.text = (MaizCosechado * precioMaiz + TrigoCosechado * precioTrigo + CebadaCosechado * precioCebada + ZanahoriaCosechado * precioZanahoria).ToString();
+            textoVentasTemporada.text = ((MaizCosechado * precioMaiz) + (TrigoCosechado * precioTrigo) + (CebadaCosechado * precioCebada) + (ZanahoriaCosechado * precioZanahoria)).ToString();
 
             MaizCosechado = 0;
             TrigoCosechado = 0;
@@ -230,7 +262,6 @@ namespace Contador
         public void CuentaFinal()
         {
             textoModo.text = modo;
-            textoDineroPrestamo.text = dineroInicial.ToString();
             textoInsumos.text = insumos.ToString();
             textoDineroNoticias.text = sistemaMoneda.dineroNoticias.ToString();
             textoInteres.text = Interes.ToString();
