@@ -100,11 +100,11 @@ public class GameManager : MonoBehaviour
         ToggleHUD(false);
         yield return new WaitForSeconds(1.5f);
         CargarPantalladeInicio();
-        yield return new WaitUntil(() => 
-            !string.IsNullOrEmpty(nameInputField.text) && 
-            !string.IsNullOrEmpty(apellidoInputField.text) && 
-            !string.IsNullOrEmpty(YearInputField.text) && 
-            !string.IsNullOrEmpty(emailInputField.text)&&
+        yield return new WaitUntil(() =>
+            !string.IsNullOrEmpty(nameInputField.text) &&
+            !string.IsNullOrEmpty(apellidoInputField.text) &&
+            !string.IsNullOrEmpty(YearInputField.text) &&
+            !string.IsNullOrEmpty(emailInputField.text) &&
             !string.IsNullOrEmpty(generoInputField.text)
         );
         Debug.Log("Todos los campos han sido llenados correctamente.");
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
     public bool GetTutorialStatus()
     {
         return TutorialActive;
-    } 
+    }
     public void OnAnswerButtonClicked()
     {
         // Call the SacarNoticia coroutine
@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
             gameToDB.GetComponent<GameToDB>().questID,
             validarRespuesta.SelectedAnswer(),
             validarRespuesta.IsCorrectAnswer()));
-        
+
 
         // Now that the coroutines have finished, execute the debug logs
         Debug.Log("PREGUNTA \n User ID:" + gameToDB.GetComponent<GameToDB>().userID + "\n" +
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("RESPUESTA \n QuestID: " + gameToDB.GetComponent<GameToDB>().questID + "\n" +
             "content: " + validarRespuesta.SelectedAnswer() + "\n" +
-            "is_correct: " + validarRespuesta.IsCorrectAnswer());  
+            "is_correct: " + validarRespuesta.IsCorrectAnswer());
     }
 
     IEnumerator DelayedSacarNoticia()
@@ -185,20 +185,21 @@ public class GameManager : MonoBehaviour
 
 
     IEnumerator SacarNoticia()  // Function to trigger a random event
-    {   
+    {
         yield return new WaitForSeconds(1f);
         eventManager.SetActive(true);
         eventManager.GetComponent<EventManager>().TriggerRandomEvent();
-        if(moneda.BarraDeuda.value >= 300)
+        if (moneda.BarraDeuda.value >= 300)
         {
             PrenderBalanceunitario();
         }
     }
 
-    IEnumerator SacarPregunta(){
+    IEnumerator SacarPregunta()
+    {
         yield return new WaitForSeconds(4f);
         Pregunta.SetActive(true);
-        FindObjectOfType<GameManager>().ToggleHUD(true,false);
+        FindObjectOfType<GameManager>().ToggleHUD(true, false);
     }
 
     public void CargarPantalladeInicio()
@@ -207,35 +208,37 @@ public class GameManager : MonoBehaviour
     }
 
     public void PrenderBalance()
-    {   
-        if (contadorDeDias >= 6){
+    {
+        if (contadorDeDias >= 6)
+        {
             StartCoroutine(verVentanaBalance());
         }
-        
+
     }
 
     public void PrenderBalanceunitario()
     {
-        if(moneda.BarraDeuda.value >= 300){
+        if (moneda.BarraDeuda.value >= 300)
+        {
             StartCoroutine(verVentanaBalance());
         }
 
     }
     IEnumerator verVentanaBalance()  // Function to trigger a random event
-    {   
+    {
         yield return new WaitForSeconds(0.5f);
         VentaBalance.SetActive(true);
-        
+
     }
 
     public void PrenderVentas()
     {
         if (contadorDeDias > 0)
-        StartCoroutine(verVentanaPanel());
+            StartCoroutine(verVentanaPanel());
     }
 
     IEnumerator verVentanaPanel()  // Function to trigger a random event
-    {   
+    {
         yield return new WaitForSeconds(0.5f);
         VentaPanel.SetActive(true);
     }
@@ -287,8 +290,10 @@ public class GameManager : MonoBehaviour
              modoDeJuego,
              moneda.moneda
         ));
+        eventManager.SetActive(false);
+
         StartCoroutine(IniciarSinTutorial());
-        
+
     }
 
     public string GetModoDeJuego()

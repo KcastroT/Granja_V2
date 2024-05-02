@@ -89,4 +89,18 @@ public class DialogManager : MonoBehaviour
             image.SetActive(true);
         }
     }
+    public void EndAllDialogs()
+{
+    animator.SetBool("IsOpen", false);
+
+    gameObject.SetActive(false);
+
+}
+
+ public void AllDialogs()
+{
+    gameObject.SetActive(true);
+}
+
+
 }

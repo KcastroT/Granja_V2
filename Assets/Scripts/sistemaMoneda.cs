@@ -36,7 +36,7 @@ public class sistemaMoneda : MonoBehaviour
 
     public void ReiniciarDinero()
     {
-        moneda = 50;
+        moneda = 0;
         ActualizarTextoMoneda();
         ActualizarSlider();
     }
