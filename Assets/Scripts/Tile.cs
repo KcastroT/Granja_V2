@@ -1,11 +1,16 @@
+/*
+Autores:
+    Joel Vargas Reynoso
+    Fabrizio Martínez Chávez
+    Roger Vicente Rendón Cuevas
+    Kevin Santiago Castro Torres
+    Manuel Olmos Antillón
+*/
 using UnityEngine;
 using Contador;
 using WorldTime;
 
 public class Tile : MonoBehaviour { 
-    //Este codigo namas hace que se resalte el tile cuando se pase el mouse por encima
-    //no tiene ninguna otra funcion, no plantes nada aqui y no hagas nada con contadores
-
     [SerializeField] private GameObject _highlight;
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private Color _baseColor;

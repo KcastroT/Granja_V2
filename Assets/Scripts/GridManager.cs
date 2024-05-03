@@ -1,3 +1,11 @@
+/*
+Autores:
+    Joel Vargas Reynoso
+    Fabrizio Martínez Chávez
+    Roger Vicente Rendón Cuevas
+    Kevin Santiago Castro Torres
+    Manuel Olmos Antillón
+*/
 using System;
 using System.Collections;
 using System.Collections.Generic;

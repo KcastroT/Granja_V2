@@ -1,3 +1,11 @@
+/*
+Autores:
+    Joel Vargas Reynoso
+    Fabrizio Martínez Chávez
+    Roger Vicente Rendón Cuevas
+    Kevin Santiago Castro Torres
+    Manuel Olmos Antillón
+*/
 using UnityEngine;
 using Unity;
 using Contador;
@@ -209,9 +217,7 @@ public class CebadaControlSembrado : MonoBehaviour
     }
     
 
-        // if(etapa !=0 && worldLightComponent.running && sembrado){
-        //     StartCoroutine(CambiarEtapaConRetraso());
-        // }
+        
     }
 
 

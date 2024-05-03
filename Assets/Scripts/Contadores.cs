@@ -1,3 +1,11 @@
+/*
+Autores:
+    Joel Vargas Reynoso
+    Fabrizio Martínez Chávez
+    Roger Vicente Rendón Cuevas
+    Kevin Santiago Castro Torres
+    Manuel Olmos Antillón
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -80,7 +88,7 @@ namespace Contador
 
 
 
-
+        //Función que obtiene los valores iniciales de los contadores
         private void Start()
         {
             sonidoCompra = sonidoCompra.GetComponent<AudioSource>();
@@ -95,6 +103,7 @@ namespace Contador
             IncrementarContadorZanahoria();
         }
 
+        //Función que actualiza los valores de los contadores
         private void Update()
         {
             GameManager gameManager = GameManager.GetComponent<GameManager>();
@@ -132,7 +141,7 @@ namespace Contador
             }
 
 
-
+            //Reiniciar contadores
             if (gameManager.ReiniciarConta == true)
             {
                 ReiniciarInventario();
@@ -141,10 +150,11 @@ namespace Contador
 
         }
 
+        //Función que reinicia los valores de los contadores
         public void ReiniciarInventario()
         {
             dineroInicial = sistemaMoneda.moneda;
-            sistemaMoneda.moneda = 59;//Dinero inicial, porfavor nunca quitar porque se bugea(tiene que ser la suma de todos los cultivos que puedas comprar junto)
+            sistemaMoneda.moneda = 59;//Dinero inicial
             contadorCebada = 0;
             contadorMaiz = 0;
             contadorTrigo = 0;
@@ -168,6 +178,8 @@ namespace Contador
 
         }
 
+
+        //Función para incrementar el contador del maíz
         public void IncrementarContadorMaiz()
         {
             if (contadorMaiz < 9)
@@ -187,6 +199,7 @@ namespace Contador
             }
         }
 
+        //Función para incrementar el contador de las zanahorias
         public void IncrementarContadorZanahoria()
         {
             if (contadorZanahoria < 9)
@@ -206,6 +219,7 @@ namespace Contador
             }
         }
 
+        //Función para incrementar el contador de la cebada
         public void IncrementarContadorCebada()
         {
             if (contadorCebada < 9)
@@ -224,6 +238,8 @@ namespace Contador
                 sonidoDenegado.Play();
             }
         }
+
+        //Función para incrementar el contador del trigo
         public void IncrementarContadorTrigo()
         {
             if (contadorTrigo < 9)
@@ -242,7 +258,7 @@ namespace Contador
             }
         }
 
-
+        //Función para vender la cosecha y agregar el dinero a las ventas
         public void VenderCosecha()
         {
             Ventas += (MaizCosechado * precioMaiz) + (TrigoCosechado * precioTrigo) + (CebadaCosechado * precioCebada) + (ZanahoriaCosechado * precioZanahoria);
@@ -259,6 +275,8 @@ namespace Contador
             CebadaCosechado = 0;
             ZanahoriaCosechado = 0;
         }
+
+        //Función para mostrar la cuenta final del jugador
         public void CuentaFinal()
         {
             textoModo.text = modo;
@@ -271,7 +289,7 @@ namespace Contador
             Debug.Log("Modo de juego: " + modo + " Prestamo: " + dineroInicial + " Insumos: " + insumos + " Bono de pregunta" + 0 + " Noticias: " + sistemaMoneda.dineroNoticias + " Intereses: " + Interes + " Ventas: " + Ventas);
         }
 
-
+        //Función para decrementar el contador del maíz
         public void DecrementarContadorMaiz()
         {
             contadorMaiz--;
@@ -285,6 +303,7 @@ namespace Contador
             ActualizarTextoContadorMaiz();
         }
 
+        //Función para decrementar el contador del trigo
         public void DecrementarContadorTrigo()
         {
             contadorTrigo--;
@@ -298,6 +317,7 @@ namespace Contador
             ActualizarTextoContadorTrigo();
         }
 
+        //Función para decrementar el contador de la cebada
         public void DecrementarContadorZanahoria()
         {
             contadorZanahoria--;
@@ -310,6 +330,8 @@ namespace Contador
             }
             ActualizarTextoContadorZanahoria();
         }
+
+        //Función para decrementar el contador de la zanahoria  
         public void DecrementarContadorCebada()
         {
             contadorCebada--;
@@ -323,6 +345,7 @@ namespace Contador
             ActualizarTextoContadorCebada();
         }
 
+        //Funciones para actualizar los textos de los contadores en la UI
         private void ActualizarTextoContadorMaiz()
         {
             textoContadorMaiz.text = contadorMaiz.ToString();
