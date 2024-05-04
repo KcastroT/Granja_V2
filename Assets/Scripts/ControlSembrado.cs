@@ -12,97 +12,228 @@ using Contador;
 using System.Collections;
 
 namespace WorldTime {
-    // La clase ControlSembrado gestiona las etapas de crecimiento de un cultivo en un entorno de simulación.
-    public class ControlSembrado : MonoBehaviour
+public class ControlSembrado : MonoBehaviour
+{
+    public GameObject clock; // Referencia al GameObject que tiene el componente Timer.
+    public GameObject RebootEtapa;
+
+    public int etapa = 0;
+    private float etapaTimer = 0f; // Contador para controlar cuándo cambiar de etapa.
+
+    private float tiempoCambioEtapa = 0.5f; // Tiempo para cambiar de etapa
+
+    private bool sembrado;
+
+    private  int cocktador = 0;
+
+
+
+
+
+    public GameObject light; // Asumo que este es el GameObject que tiene el componente WorldLight.
+    public GameObject tile; // Asumo que este es el GameObject que tiene el componente Tile.
+    public GameObject draggedMaiz; // Asumo que este es el GameObject que tiene el componente DragMaiz.
+    public GameObject PlantingCrop;
+
+    void Start()
     {
-        public GameObject clock; // Referencia al GameObject que contiene el componente Timer.
-        public GameObject RebootEtapa;
+        etapa = 0;
+        sembrado = false;
+        cocktador = 0;
+        
+    }
 
-        public int etapa = 0; // Indica la etapa actual de crecimiento del cultivo.
-        private float etapaTimer = 0f; // Cronómetro para medir el tiempo transcurrido en la etapa actual.
 
-        private float tiempoCambioEtapa = 0.5f; // Intervalo de tiempo antes de pasar a la siguiente etapa.
 
-        private bool sembrado; // Estado que indica si el cultivo ha sido sembrado.
+    void Update()
+    {
+        // Obtener los componentes de los GameObjects.
+        Tile tileComponent = tile.GetComponent<Tile>();
+        DragMaiz dragMaizComponent = draggedMaiz.GetComponent<DragMaiz>();
+        WorldLight worldLightComponent = light.GetComponent<WorldLight>();
+        RebootEtapa rebootEtapaComponent = RebootEtapa.GetComponent<RebootEtapa>();
 
-        private int cocktador = 0; // Contador para controlar la reproducción de sonido una sola vez.
 
-        public GameObject light; // GameObject que contiene el componente WorldLight.
-        public GameObject tile; // GameObject que contiene el componente Tile.
-        public GameObject draggedMaiz; // GameObject que contiene el componente DragMaiz.
-        public GameObject PlantingCrop; // GameObject que se asume contiene el componente de audio para el sonido de plantación.
+        // Incrementar el contador de etapa.
+        etapaTimer += Time.deltaTime;
 
-        void Start()
+        if (rebootEtapaComponent.reboot)
         {
             etapa = 0;
             sembrado = false;
             cocktador = 0;
         }
 
-        void Update()
-        {
-            // Obtener componentes necesarios de los GameObjects.
-            Tile tileComponent = tile.GetComponent<Tile>();
-            DragMaiz dragMaizComponent = draggedMaiz.GetComponent<DragMaiz>();
-            WorldLight worldLightComponent = light.GetComponent<WorldLight>();
-            RebootEtapa rebootEtapaComponent = RebootEtapa.GetComponent<RebootEtapa>();
-
-            // Incrementar el contador de tiempo para cambiar de etapa.
-            etapaTimer += Time.deltaTime;
-
-            // Restablecer la etapa si se solicita un reinicio.
-            if (rebootEtapaComponent.reboot)
-            {
-                etapa = 0;
-                sembrado = false;
-                cocktador = 0;
-            }
-
-            // Avanzar a la siguiente etapa si las condiciones lo permiten.
-            if (sembrado && worldLightComponent.running && etapa != 0) {
+        if (sembrado && worldLightComponent.running && etapa != 0) {
                 if (etapaTimer >= tiempoCambioEtapa) {
-                    etapaTimer = 0f; 
-                    etapa++;
+                    etapaTimer = 0f; // Reiniciar el contador de tiempo
+                    etapa++; // Incrementar la etapa
                     if (etapa >= 5) {
-                        etapa = 5; // Limitar la etapa máxima a 5
+                        etapa = 5; // Mantener la etapa en 5 si llega a ese valor
                     }
                 }
             }
 
-            // Manejo de la plantación y activación de objetos en función de la etapa.
-            if (tileComponent.IsTouched && DragMaiz.isDragging && !sembrado)
-            {
-                etapa = 1;
-                GameObject.FindAnyObjectByType<Contadores>().DecrementarContadorMaiz();
-            }
+        // Cambiar la etapa actual cuando 
+        if (tileComponent.IsTouched && DragMaiz.isDragging && !sembrado)
+        {
+            etapa = 1;
+            //en esta condicion lo quiero decrementar al contador maiz
+            GameObject.FindAnyObjectByType<Contadores>().DecrementarContadorMaiz();
+        }
+        
 
-            // Actualizar la visibilidad de objetos hijo en función de la etapa actual.
+        if (etapa==0)//cuando no hay semillas
+        {
+            sembrado = false;
+            // Itera sobre todos los hijos de este GameObject.
             for (int i = 0; i < transform.childCount; i++)
             {
                 Transform child = transform.GetChild(i);
+            
                 if (child.name == "lit")
                 {
-                    continue; // Ignorar el hijo "lit".
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
                 }
                 else
                 {
-                    bool shouldActivate = (etapa > 0) && (child.name.Contains(((char)('a' + etapa - 1)).ToString()));
-                    child.gameObject.SetActive(shouldActivate);
+
+                    child.gameObject.SetActive(false);
                 }
             }
-
-            // Reproducir sonido durante la primera plantación.
-            sound();
         }
+        else if (etapa==1){
+            sembrado = true;
 
-        // Función para reproducir el sonido de sembrado una sola vez.
-        void sound()
-        {
-            if (cocktador == 0)
+            //Reproduce sonido de sembrado
+            sound();
+            // Itera sobre todos los hijos de este GameObject.
+            for (int i = 0; i < transform.childCount; i++)
             {
-                cocktador++;
-                PlantingCrop.GetComponent<AudioSource>().Play();
+                Transform child = transform.GetChild(i);
+                // Verifica si el nombre del hijo contiene la letra "a".
+                if (child.name == "lit")
+                {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else if (!child.name.Contains("a"))
+                {
+                    // Si el nombre no contiene "a", desactiva el hijo.
+                    child.gameObject.SetActive(false);
+                }
+                else
+                {
+                    // Si el nombre contiene "a", asegura que el hijo esté activo.
+                    child.gameObject.SetActive(true);
+                }
             }
         }
+        
+        else if (etapa==2){
+            // Itera sobre todos los hijos de este GameObject.
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                // Verifica si el nombre del hijo contiene la letra "a".
+                if (child.name == "lit")
+                {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else if (!child.name.Contains("b"))
+                {   
+                    // Si el nombre no contiene "a", desactiva el hijo.
+                    child.gameObject.SetActive(false);
+
+                }else
+                {
+                    // Si el nombre contiene "a", asegura que el hijo esté activo.
+                    child.gameObject.SetActive(true);
+                }
+            }
+        }
+        else if (etapa==3){
+            // Itera sobre todos los hijos de este GameObject.
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                // Verifica si el nombre del hijo contiene la letra "a".
+                if (child.name == "lit")
+                {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else if (!child.name.Contains("c"))
+                {
+                    // Si el nombre no contiene "a", desactiva el hijo.
+                    child.gameObject.SetActive(false);
+                }
+                else
+                {
+                    // Si el nombre contiene "a", asegura que el hijo esté activo.
+                    child.gameObject.SetActive(true);
+                }
+            }
+        }
+        else if (etapa==4){
+            // Itera sobre todos los hijos de este GameObject.
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                // Verifica si el nombre del hijo contiene la letra "a".
+                if (child.name == "lit")
+                {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else if (!child.name.Contains("d"))
+                {
+                    // Si el nombre no contiene "a", desactiva el hijo.
+                    child.gameObject.SetActive(false);
+                }
+                else
+                {
+                    // Si el nombre contiene "a", asegura que el hijo esté activo.
+                    child.gameObject.SetActive(true);
+                }
+            }
+        }
+        else if (etapa==5){
+            // Itera sobre todos los hijos de este GameObject.
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                // Verifica si el nombre del hijo contiene la letra "a".
+                if (child.name == "lit")
+                {
+                        continue; // Salta a la siguiente iteración del bucle, ignorando el hijo "lit".
+                }
+                else if (!child.name.Contains("e"))
+                {
+                    // Si el nombre no contiene "a", desactiva el hijo.
+                    child.gameObject.SetActive(false);
+                }
+                else
+                {
+                    // Si el nombre contiene "a", asegura que el hijo esté activo.
+                    child.gameObject.SetActive(true);
+                }
+            }
     }
+    
+
+        
+    }
+
+
+    void sound()
+    {
+        if (cocktador == 0)
+        {
+            cocktador++;
+            PlantingCrop.GetComponent<AudioSource>().Play();
+        }
+    }
+    
+
+    
+    
+}
 }
