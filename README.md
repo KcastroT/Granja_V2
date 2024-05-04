@@ -1,7 +1,7 @@
 # Repositorio de Qultiva Quest
 
 ## Descripción
-Este repositorio contiene el código fuente de la aplicación Qultiva Quest, la cual es un videojuego
+Este repositorio contiene el código fuente de la aplicación Qultiva Quest, el cual es un videojuego
 que tiene como objetivo promover a la empresa Verqor y la agricultura regenerativa.
 
 ## Integrantes
