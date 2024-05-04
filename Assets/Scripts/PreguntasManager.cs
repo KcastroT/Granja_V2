@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//Clase para manejar las preguntas y respuestas
 public class PreguntasManager : MonoBehaviour
 {
     public TextMeshProUGUI questionText;

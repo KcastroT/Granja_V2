@@ -12,13 +12,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-
+//Define una clase para enviar datos a la base de datos en comunicación con la API
 public class GameToDB : MonoBehaviour
 {
 
     public int userID;
     public int questID;
 
+    //Estructuras para guardar los datos de usuario, juego, pregunta y respuesta
     struct User
     {
         public string nombre;
@@ -48,14 +49,15 @@ public class GameToDB : MonoBehaviour
         public string contenido;
         public bool is_correct;
     }
-    //como defino el url como una variable de entorno
 
+
+    //URL de la API
     private string url="http://35.169.14.147:8080";
 
 
 
 
-
+    //Funcion para subir un usuario a la base de datos
     public IEnumerator UploadUser(string _nombre, string _apellido, string _correo, string _contrasena, string _anio_nacimiento, string _genero)
     {
     User user;
@@ -76,12 +78,6 @@ public class GameToDB : MonoBehaviour
     if (request.result == UnityWebRequest.Result.Success) {
     try {
         ApiResponse response = JsonUtility.FromJson<ApiResponse>(request.downloadHandler.text);
-        /*Debug.Log("Response text: " + request.downloadHandler.text);*/
-        //Si la respuesta es exitosa, guarda el nombre de usuario y el ID de usuario 
-        //En todas los demas casos o errores marca el mensaje incorrecto
-        /*Debug.Log("Success:" + response.success +
-                  "\nInsert ID:" + response.insertId +
-                  "\nUserDataManager Instance: " + UserDataManager.Instance);*/
 
         if (response.success) {
             UserDataManager.Instance = new UserDataManager();
@@ -106,7 +102,7 @@ public class GameToDB : MonoBehaviour
     
     }
 
-    //se manda hasta el final del juego
+    //Funcion para subir un juego a la base de datos
     public IEnumerator UploadGame(int _idUsuario, string _financiamiento, int _puntaje)
     {
         Game game;
@@ -122,42 +118,43 @@ public class GameToDB : MonoBehaviour
         }
     }
 
-    
-public IEnumerator UploadQuestion(int _idUsuario, string _contenido)
-{
-    Question question;
-    question.idUsuario = _idUsuario;
-    question.contenido = _contenido;
-    string json = JsonUtility.ToJson(question);
+    //Funcion para subir una pregunta a la base de datos
+    public IEnumerator UploadQuestion(int _idUsuario, string _contenido)
+    {
+        Question question;
+        question.idUsuario = _idUsuario;
+        question.contenido = _contenido;
+        string json = JsonUtility.ToJson(question);
 
-    UnityWebRequest request = UnityWebRequest.Post(url+"/preguntas", json, "application/json");
-    yield return request.SendWebRequest();
+        UnityWebRequest request = UnityWebRequest.Post(url+"/preguntas", json, "application/json");
+        yield return request.SendWebRequest();
 
-    //Procesa la respuesta del servidor
-    if (request.result == UnityWebRequest.Result.Success) {
-    try {
-        ApiResponse response = JsonUtility.FromJson<ApiResponse>(request.downloadHandler.text);
-        Debug.Log("Response text: " + request.downloadHandler.text);
-        //Si la respuesta es exitosa, guarda el nombre de usuario y el ID de usuario 
-        //En todas los demas casos o errores marca el mensaje incorrecto
-        Debug.Log("Success Pregunta:" + response.success +
-                  "\n Preguntaaaa ID:" + response.insertId);
+        //Procesa la respuesta del servidor
+        if (request.result == UnityWebRequest.Result.Success) {
+        try {
+            ApiResponse response = JsonUtility.FromJson<ApiResponse>(request.downloadHandler.text);
+            Debug.Log("Response text: " + request.downloadHandler.text);
+            //Si la respuesta es exitosa, guarda el nombre de usuario y el ID de usuario 
+            //En todas los demas casos o errores marca el mensaje incorrecto
+            Debug.Log("Success Pregunta:" + response.success +
+                    "\n Preguntaaaa ID:" + response.insertId);
 
-        if (response.success) {
+            if (response.success) {
 
-            questID = response.insertId;
-            Debug.Log("Pregunta registrado con ID: " + response.insertId +
-                      "Para usuario: " + UserDataManager.Instance.IDUsuario);
-        } else {
-            Debug.LogError("Error en la API: " + response.error);
+                questID = response.insertId;
+                Debug.Log("Pregunta registrado con ID: " + response.insertId +
+                        "Para usuario: " + UserDataManager.Instance.IDUsuario);
+            } else {
+                Debug.LogError("Error en la API: " + response.error);
+            }
+        } catch (System.Exception ex) {
+            Debug.LogError("Error al procesar la respuesta: " + ex.Message);
         }
-    } catch (System.Exception ex) {
-        Debug.LogError("Error al procesar la respuesta: " + ex.Message);
+
+        }
     }
 
-    }
-}
-
+    //Funcion para subir una respuesta a la base de datos
     public IEnumerator UploadAnswer(int _pregunta_idpregunta, string _contenido, bool _is_correct)
     {
         Answer answer;
@@ -173,6 +170,7 @@ public IEnumerator UploadQuestion(int _idUsuario, string _contenido)
         }
     }
 
+    //Función para manejar la respuesta del servidor
     void HandleResponse(UnityWebRequest www)
     {
         if (www.result != UnityWebRequest.Result.Success)

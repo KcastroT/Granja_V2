@@ -14,6 +14,7 @@ using TMPro;
 using Unity.Mathematics;
 using System;
 
+//Clase que actúa como temporizador
 public class Timer : MonoBehaviour
 {
     public float timeValue = 120;
@@ -22,7 +23,7 @@ public class Timer : MonoBehaviour
 
     
 
-    // Update is called once per frame
+    // Funcion que calcula el tiempo restante
     void Update()
     {
         if(timeValue > 0)
@@ -39,6 +40,7 @@ public class Timer : MonoBehaviour
         
     }
 
+    // Funcion que muestra el tiempo restante
     void DisplayTime(float timeToDisplay)
     {
         if(timeToDisplay < 0)

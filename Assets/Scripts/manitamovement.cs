@@ -10,9 +10,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Clase para manejar el movimiento de la manita animada
 public class manitamovimeinto : MonoBehaviour
 {
-    //haz que la hija de este objeto solo este encendida 5 segundos despues de llamar a la funcion manita usando deltaTime
+    //Haz que la hija de este objeto solo este encendida 5 segundos despues de llamar a la funcion manita usando deltaTime
     public GameObject manita;
     public float tiempo = 5;
     public bool manitaactiva = false;
@@ -21,14 +22,15 @@ public class manitamovimeinto : MonoBehaviour
     {
         manitaactiva = true;
     }
-    // Start is called before the first frame update
+
+
     void Start()
     {
         manita.SetActive(false);
         
     }
 
-    // Update is called once per frame
+    //Mueve la manita si esta activa por 5 segundos
     void Update()
     {
         if (manitaactiva)

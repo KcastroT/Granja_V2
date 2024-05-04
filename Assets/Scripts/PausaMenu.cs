@@ -9,6 +9,7 @@ Autores:
 using UnityEngine;
 using TMPro;
 
+//Clase arbitraria para manejar el menú de pausa
 public class PausaMenu : MonoBehaviour
 {
     public GameObject pausaPanel;

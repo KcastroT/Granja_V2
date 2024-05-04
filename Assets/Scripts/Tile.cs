@@ -10,6 +10,7 @@ using UnityEngine;
 using Contador;
 using WorldTime;
 
+//Clase para manejar los tiles interactivos
 public class Tile : MonoBehaviour { 
     [SerializeField] private GameObject _highlight;
     [SerializeField] private SpriteRenderer _renderer;
@@ -17,6 +18,8 @@ public class Tile : MonoBehaviour {
 
 
     public bool IsTouched=false;
+    
+    //Función para inicializar el tile
     public void Init() {
         _renderer.color = _baseColor;
         _highlight.SetActive(false);
@@ -24,9 +27,8 @@ public class Tile : MonoBehaviour {
     }
 
     void OnMouseEnter() {
-    _highlight.SetActive(true);
-    //Debug.Log("Mouse enter"); 
-    IsTouched=true;   
+        _highlight.SetActive(true);
+        IsTouched=true;   
     }
 
     void OnMouseExit()

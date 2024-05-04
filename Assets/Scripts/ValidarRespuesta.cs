@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
+//clase para validar la respuesta de las preguntas del jugador
 public class ValidarRespuesta : MonoBehaviour
 {
     public sistemaPregunta sistemaPregunta;
@@ -40,6 +41,7 @@ public class ValidarRespuesta : MonoBehaviour
         sonidoIncorrecto = sonidoincorrecto.GetComponent<AudioSource>();
     }
 
+    //Función que valida la respuesta del jugador
     public bool ValidateAnswer(int n)
     {
         Pregunta currentPregunta = sistemaPregunta.GetCurrentPregunta();
@@ -79,6 +81,7 @@ public class ValidarRespuesta : MonoBehaviour
         return userAnswer;
     }
 
+    //Función para cambiar la pregunta
     IEnumerator ChangeQuestion()
     {
         yield return new WaitForSeconds(4f);
@@ -160,6 +163,7 @@ public class ValidarRespuesta : MonoBehaviour
         StartCoroutine(ChangeQuestion());
     }
 
+    //Cambia el color del botón correcto a verde
     private void ChangeCorrectButtonColor()
     {
         // Assuming correctAnswerIndex is the index of the correct answer

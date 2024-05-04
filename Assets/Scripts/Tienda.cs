@@ -7,8 +7,9 @@ Autores:
     Manuel Olmos Antillón
 */
 using UnityEngine;
-using UnityEngine.UI; // Asegúrate de incluir este namespace para trabajar con elementos UI
+using UnityEngine.UI; 
 
+//Clase para manejar la tienda
 public class Tienda : MonoBehaviour
 {
     public GameObject MenuTienda;
@@ -23,6 +24,7 @@ public class Tienda : MonoBehaviour
     public GameObject btnCropZanahoriaCanvas;
     public GameObject btnCropTrigoCanvas;
 
+    //Función para activar o desactivar la tienda
     public void ToggleTienda()
     {
         tiendaActiva = !tiendaActiva;
@@ -53,9 +55,5 @@ public class Tienda : MonoBehaviour
         btnPausa.interactable = interactable;
         btnTienda.interactable = interactable;
         btnClock.interactable = interactable;
-        // btnCropMaizCanvas.interactable = interactable;
-        // btnCropCebadaCanvas.interactable = interactable;
-        // btnCropZanahoriaCanvas.interactable = interactable;
-        // btnCropTrigoCanvas.interactable = interactable;
     }
 }

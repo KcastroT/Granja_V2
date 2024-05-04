@@ -12,6 +12,8 @@ using Contador;
 using System.Collections;
 
 namespace WorldTime {
+
+// Clase para controlar el crecimiento de las plantas de trigo
 public class TrigoControlSembrado : MonoBehaviour
 {
     public GameObject clock; // Referencia al GameObject que tiene el componente Timer.
@@ -223,11 +225,6 @@ public class TrigoControlSembrado : MonoBehaviour
                 }
             }
     }
-    
-
-        // if(etapa !=0 && worldLightComponent.running && sembrado){
-        //     StartCoroutine(CambiarEtapaConRetraso());
-        // }
     }
 
     void sound()
@@ -238,10 +235,6 @@ public class TrigoControlSembrado : MonoBehaviour
             PlantingCrop.GetComponent<AudioSource>().Play();
         }
     }
-    
-
-    
-    
 }
 }
 

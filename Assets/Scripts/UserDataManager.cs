@@ -10,9 +10,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Clase para manejar los datos del usuario
 public class UserDataManager : MonoBehaviour
 {
-    public static UserDataManager Instance; // Singleton pattern
+    public static UserDataManager Instance; 
 
     public string NombreUsuario;
     public string ApellidoUsuario;

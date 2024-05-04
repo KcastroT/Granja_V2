@@ -11,18 +11,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//Clase arbirtraria para manejar la carga de escenas
 public class Loader : MonoBehaviour
 {
     public GameObject loadingScreen;
     public Slider loadingBar;
 
-    // Function to initiate scene loading
+    // Función para iniciar la carga de la escena
     public void LoadScene()
     {
         StartCoroutine(LoadSceneAsync());
     }
 
-    // Coroutine for asynchronous scene loading with loading animation
+    // Corutina para cargar la escena de manera asíncrona
     IEnumerator LoadSceneAsync()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync("Game");

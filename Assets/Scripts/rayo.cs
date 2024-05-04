@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Clase para manejar las partículas de rayos
 public class rayo : MonoBehaviour
 {
     public GameObject rayoaobj;

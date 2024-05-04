@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Clase para manejar la lluvia en el juego
 public class lluvia : MonoBehaviour
 {public GameObject lluviaobj;
 public GameObject sonidolluvia; // Asegúrate de que este objeto tenga un componente AudioSource con el clip de sonido de la lluvia

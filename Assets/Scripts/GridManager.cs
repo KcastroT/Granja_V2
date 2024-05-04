@@ -11,7 +11,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Clase para manejar el grid de tiles de los cultivos
 public class GridManager : MonoBehaviour {
+    // Referencias a los prefabs de los tiles
     [SerializeField] private int _width, _height;
 
     [SerializeField] private Tile _tilePrefabMaiz;
@@ -31,7 +33,8 @@ public class GridManager : MonoBehaviour {
         GenerateGridCebada();
         GenerateGridZanahoria();
     }
-
+    
+    // Función para generar el grid de tiles
     void GenerateGridMaiz() {
         _tilesMaiz = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < _width; x++) {
@@ -45,6 +48,7 @@ public class GridManager : MonoBehaviour {
         }
     }
 
+    //Funcion para generar el grid de tiles de trigo
     void GenerateGridTrigo(){
         _tilesTrigo = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < _width; x++) {
@@ -58,6 +62,8 @@ public class GridManager : MonoBehaviour {
         }
 
     }
+
+    //Funcion para generar el grid de tiles de cebada
     void GenerateGridCebada(){
         _tilesCebada = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < _width; x++) {
@@ -71,6 +77,8 @@ public class GridManager : MonoBehaviour {
         }
 
     }
+
+    //Funcion para generar el grid de tiles de zanahoria
     void GenerateGridZanahoria(){
         _tilesZanahoria = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < _width; x++) {

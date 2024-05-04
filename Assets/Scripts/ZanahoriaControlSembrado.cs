@@ -13,6 +13,7 @@ using System.Collections;
 using JetBrains.Annotations;
 
 namespace WorldTime {
+    //Clase para controlar el crecimiento de las plantas de zanahoria
 public class ZanahoriaControlSembrado : MonoBehaviour
 {
     public GameObject clock; // Referencia al GameObject que tiene el componente Timer.

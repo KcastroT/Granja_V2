@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Clase para manejar las partículas de la sequía
 public class particledesert : MonoBehaviour
 {
     public GameObject arbusto;
@@ -20,14 +21,14 @@ public class particledesert : MonoBehaviour
     {
         arbustosactiva = true;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         arbusto.SetActive(false);
         
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (arbustosactiva)

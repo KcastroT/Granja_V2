@@ -12,6 +12,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+//Define el comportamiento del juego
 public class GameManager : MonoBehaviour
 {
     // Este script contiene todas la mayoria variables y funciones globales del juego
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Función que prepara el juego para iniciar
     public void Start()
     {
         GameStarted = false;
@@ -88,6 +90,7 @@ public class GameManager : MonoBehaviour
         contadorDeDias = 0;
     }
 
+    //Cuando se reinicia el juego se llama a esta función
     IEnumerator IniciarSinTutorial()
     {
         contadorDeDias = 0;
@@ -103,6 +106,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //Función para mostrar la pantalla de inicio con un delay
     IEnumerator ShowPantallaInicioWithDelay()
     {
         ToggleHUD(false);
@@ -149,30 +153,31 @@ public class GameManager : MonoBehaviour
     {
         return TutorialActive;
     }
+
     public void OnAnswerButtonClicked()
     {
-        // Call the SacarNoticia coroutine
+
         StartCoroutine(DelayedSacarNoticia());
 
-        // Start the new coroutine
+
         StartCoroutine(UploadAndLog());
     }
 
     private IEnumerator UploadAndLog()
     {
-        // Start the UploadQuestion coroutine and wait for it to finish
+
         yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadQuestion(
             gameToDB.GetComponent<GameToDB>().userID,
             sistemaPregunta.GetCurrentPregunta().pregunta));
 
-        // Now that the UploadQuestion coroutine has finished, start the UploadAnswer coroutine and wait for it to finish
+
         yield return StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadAnswer(
             gameToDB.GetComponent<GameToDB>().questID,
             validarRespuesta.SelectedAnswer(),
             validarRespuesta.IsCorrectAnswer()));
 
 
-        // Now that the coroutines have finished, execute the debug logs
+
         Debug.Log("PREGUNTA \n User ID:" + gameToDB.GetComponent<GameToDB>().userID + "\n" +
                 "content: " + sistemaPregunta.GetCurrentPregunta().pregunta);
 
@@ -181,18 +186,19 @@ public class GameManager : MonoBehaviour
             "is_correct: " + validarRespuesta.IsCorrectAnswer());
     }
 
+    //Función para sacar una noticia con un delay
     IEnumerator DelayedSacarNoticia()
     {
-        // Wait for 2 seconds (or any other delay you want)
+
         yield return new WaitForSeconds(2);
         Pregunta.SetActive(false);
 
-        // Call the SacarNoticia coroutine
+
         StartCoroutine(SacarNoticia());
     }
 
-
-    IEnumerator SacarNoticia()  // Function to trigger a random event
+    //Función para sacar una noticia
+    IEnumerator SacarNoticia() 
     {
         yield return new WaitForSeconds(1f);
         eventManager.SetActive(true);
@@ -203,13 +209,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Función para sacar pregunta
     IEnumerator SacarPregunta()
     {
         yield return new WaitForSeconds(4f);
         Pregunta.SetActive(true);
-        FindObjectOfType<GameManager>().ToggleHUD(true, false);
+        ToggleHUD(true, false);
     }
 
+    //Función para cargar la pantalla de inicio
     public void CargarPantalladeInicio()
     {
         pantallaInicio.SetActive(true);
@@ -239,18 +247,21 @@ public class GameManager : MonoBehaviour
 
     }
 
+
     public void PrenderVentas()
     {
         if (contadorDeDias > 0)
             StartCoroutine(verVentanaPanel());
     }
 
-    IEnumerator verVentanaPanel()  // Function to trigger a random event
+    // Función para mostrar el panel de ventas
+    IEnumerator verVentanaPanel()  
     {
         yield return new WaitForSeconds(0.5f);
         VentaPanel.SetActive(true);
     }
 
+    // Función para mostrar el panel de opciones
     public void MostrarOpcionesPanel()
     {
         pantallaInicio.SetActive(false);
@@ -258,11 +269,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+    // Función para obtener el modo de juego
     public void GetModoDeJuego(string modo)
     {
         modoDeJuego = modo;
     }
 
+    // Función para iniciar el juego
     public void StartGame()
     {
         GameStarted = true;
@@ -291,6 +304,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Comienza un nuevo juego, restableciendo todos los contadores y estados necesarios.
     public void NuevoJuego()
     {
         StartCoroutine(gameToDB.GetComponent<GameToDB>().UploadGame(

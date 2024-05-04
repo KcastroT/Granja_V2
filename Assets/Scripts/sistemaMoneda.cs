@@ -12,7 +12,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-
+//Clase que maneja el balance del jugador
 public class sistemaMoneda : MonoBehaviour
 {
     public int moneda;
@@ -24,6 +24,7 @@ public class sistemaMoneda : MonoBehaviour
     public GameObject FuegosArtificialesContainer;
 
 
+    //Al iniciar el juego, se inicializa el valor de la moneda y se actualiza el texto
     void Start()
     {
         moneda = 0;
@@ -43,6 +44,7 @@ public class sistemaMoneda : MonoBehaviour
         }
     }
 
+
     public void ReiniciarDinero()
     {
         moneda = 0;
@@ -50,18 +52,16 @@ public class sistemaMoneda : MonoBehaviour
         ActualizarSlider();
     }
 
+    //Al perder o ganar, se muestra un mensaje
     public void MostrarEnding(){
         if (moneda < 0)
         {
             MensajeEnding.text= "Perdiste esta partida".ToString();
         }else{
             MensajeEnding.text= "Ganaste esta partida".ToString();
-            //activar Fuegos Artificiales
 
         }
     }
-
-
 
 
     public void RestarMonedas(int cantidad)
@@ -80,35 +80,6 @@ public class sistemaMoneda : MonoBehaviour
         ActualizarTextoMoneda();
         ActualizarSlider();
     }
-    public void RestarNarcos()
-    {
-        int monedaspasadas = moneda;//variable que usaremos solo para imprimir la transaccion de monedas
-        moneda -= 150;
-        dineroNoticias -= 150;
-        ActualizarTextoMoneda();
-        ActualizarSlider();
-
-        Debug.Log("Transaccion: $" + monedaspasadas + " - $20 = $" + moneda);
-    }
-    public void AñadirLluvia()
-    {
-        int monedaspasadas = moneda;//variable que usaremos solo para imprimir la transaccion de monedas
-        moneda += 40;
-        dineroNoticias += 40;
-        ActualizarTextoMoneda();
-        ActualizarSlider();
-        Debug.Log("Transaccion: $" + monedaspasadas + " + $35 = $" + moneda);
-    }
-    public void RestarSequia()
-    {
-        int monedaspasadas = moneda;//variable que usaremos solo para imprimir la transaccion de monedas
-        moneda -= 80;
-        dineroNoticias -= 80;
-        ActualizarTextoMoneda();
-        ActualizarSlider();
-
-        Debug.Log("Transaccion: $" + monedaspasadas + " - $30 = $" + moneda);
-    }
 
     public void SumarMonedas(int cantidad)
     {
@@ -117,6 +88,7 @@ public class sistemaMoneda : MonoBehaviour
         ActualizarSlider();
     }
 
+    //Funcion para sumar monedas con condicion (modo de juego)
     public void SumarConCondicion(int cantidad)
     {
         string modoDeJuego = GameManager.Instance.modoDeJuego; 
@@ -147,9 +119,10 @@ public class sistemaMoneda : MonoBehaviour
         }
     }
 
+    //Funcion para restar monedas con condicion (modo de juego)
     public void RestarConCondicion(int cantidad)
     {
-        string modoDeJuego = GameManager.Instance.modoDeJuego; // Correct access of a static member
+        string modoDeJuego = GameManager.Instance.modoDeJuego; 
 
         if (modoDeJuego == "Verqor")
         {
@@ -174,6 +147,7 @@ public class sistemaMoneda : MonoBehaviour
         }
     }
 
+    //Funcion para mostrar ajustar la barra de deudas
     public void ActualizarSlider()
     {
         if (moneda < 0)

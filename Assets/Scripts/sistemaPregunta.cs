@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 [System.Serializable]
 public class Pregunta
 {
@@ -25,6 +26,7 @@ public class Preguntas
     public List<Pregunta> preguntas;
 }
 
+//Clase para manejar las preguntas y respuestas
 public class sistemaPregunta : MonoBehaviour
 {
     public PreguntasManager preguntasManager;
@@ -34,7 +36,7 @@ public class sistemaPregunta : MonoBehaviour
 
     void Start()
     {
-        // Initialize random seed
+        //Inicializar la semilla para obtener preguntas aleatorias
         Random.InitState(System.DateTime.Now.Millisecond);
 
         TextAsset jsonFile = Resources.Load<TextAsset>("preguntas");
@@ -47,6 +49,7 @@ public class sistemaPregunta : MonoBehaviour
         preguntasManager.UpdateQuestionAndAnswers(currentPregunta.pregunta, currentPregunta.opciones);
     }
 
+    //
     public Pregunta GetCurrentPregunta()
     {
         return currentPregunta;

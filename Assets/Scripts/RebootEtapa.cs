@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//Clase para manejar el reinicio de la etapa de los cultivos
 public class RebootEtapa : MonoBehaviour
 {
     public bool reboot = false;
