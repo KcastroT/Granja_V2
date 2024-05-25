@@ -1,11 +1,4 @@
-/*
-Autores:
-    Joel Vargas Reynoso
-    Fabrizio Martínez Chávez
-    Roger Vicente Rendón Cuevas
-    Kevin Santiago Castro Torres
-    Manuel Olmos Antillón
-*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,7 +20,7 @@ public class sistemaMoneda : MonoBehaviour
     //Al iniciar el juego, se inicializa el valor de la moneda y se actualiza el texto
     void Start()
     {
-        moneda = 0;
+        moneda = 400;
         dineroNoticias = 0;
         if (textoMoneda == null)
             textoMoneda = GetComponent<TextMeshProUGUI>();
@@ -88,65 +81,8 @@ public class sistemaMoneda : MonoBehaviour
         ActualizarSlider();
     }
 
-    //Funcion para sumar monedas con condicion (modo de juego)
-    public void SumarConCondicion(int cantidad)
-    {
-        string modoDeJuego = GameManager.Instance.modoDeJuego; 
-        if (modoDeJuego == "Verqor")
-        {
-            moneda += cantidad;
-            ActualizarTextoMoneda();
-            ActualizarSlider();
 
-
-
-        }
-        else if (modoDeJuego == "Tradicional")
-        {
-            moneda += (int)(cantidad * 0.5);
-            ActualizarTextoMoneda();
-            ActualizarSlider();
-
-
-        }
-        else
-        {
-            moneda += 0;
-            ActualizarTextoMoneda();
-            ActualizarSlider();
-
-
-        }
-    }
-
-    //Funcion para restar monedas con condicion (modo de juego)
-    public void RestarConCondicion(int cantidad)
-    {
-        string modoDeJuego = GameManager.Instance.modoDeJuego; 
-
-        if (modoDeJuego == "Verqor")
-        {
-            moneda -= cantidad;
-            ActualizarTextoMoneda();
-            ActualizarSlider();
-
-        }
-        else if (modoDeJuego == "Tradicional")
-        {
-            moneda -= (int)(cantidad * 0.5);
-            ActualizarTextoMoneda();
-            ActualizarSlider();
-
-        }
-        else
-        {
-            moneda -= (int)(cantidad * 0.25);
-            ActualizarTextoMoneda();
-            ActualizarSlider();
-
-        }
-    }
-
+   
     //Funcion para mostrar ajustar la barra de deudas
     public void ActualizarSlider()
     {

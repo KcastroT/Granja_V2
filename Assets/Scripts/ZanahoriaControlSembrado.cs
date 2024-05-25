@@ -1,16 +1,8 @@
-/*
-Autores:
-    Joel Vargas Reynoso
-    Fabrizio Martínez Chávez
-    Roger Vicente Rendón Cuevas
-    Kevin Santiago Castro Torres
-    Manuel Olmos Antillón
-*/
+
 using UnityEngine;
 using Unity;
 using Contador;
 using System.Collections;
-using JetBrains.Annotations;
 
 namespace WorldTime {
     //Clase para controlar el crecimiento de las plantas de zanahoria
