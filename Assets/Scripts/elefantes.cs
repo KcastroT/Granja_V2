@@ -39,7 +39,7 @@ public class elefantes : MonoBehaviour
             elefante_cont.SetActive(true);
         }
 
-        if (tiempotranscurrido <= 5f)
+        if (tiempotranscurrido <= 9f)
         {
             // Mientras el tiempo transcurrido sea <= 5 segundos, activar todo
             tiempotranscurrido += Time.deltaTime;

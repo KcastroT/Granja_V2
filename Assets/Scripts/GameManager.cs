@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     public GameObject musicaAmbiente;
     public GameObject HUD;
 
+    public GameObject clickeable;
+    private bool isParpadeando = false;
+    private float tiempotranscurrido = 0;
+
     public int contadorDeDias = 0;
     private int d = 0; 
 
@@ -47,6 +51,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         GameStarted = true;
+        isParpadeando = false;
         d=contadorDeDias;
         StartCoroutine(ShowTutorial());
         contadorDeDias = 0;
@@ -82,15 +87,42 @@ public class GameManager : MonoBehaviour
 
     }
 
+    IEnumerator Parpadear()
+    {
+        while (isParpadeando)
+        {
+            tiempotranscurrido += Time.deltaTime;
+
+            if (Mathf.FloorToInt(tiempotranscurrido * 2) % 2 == 0)
+            {
+                clickeable.SetActive(true);
+                clickeable.GetComponent<TextMeshProUGUI>().alpha = 1;
+            }
+            else
+            {
+                clickeable.SetActive(false);
+            }
+
+            // Pausa la coroutine por un frame
+            yield return null;
+        }
+
+        // Asegura que el objeto esté activo al finalizar el parpadeo
+        clickeable.SetActive(false);
+    }
+
     //Función para mostrar la pantalla de inicio con un delay
     IEnumerator ShowTutorial()
     {
+        isParpadeando = true;
+        StartCoroutine(Parpadear());
+
         ToggleHUD(false, false);  // HUD is visible but not interactable
         yield return new WaitForSeconds(1.5f);
         Debug.Log("Todos los campos han sido llenados correctamente.");
-        //falta prender un mensaje que digas "CLICK PARA JUGAR"
+        //falta mostrar un mensaje parpadeante que diga "CLICK PARA JUGAR"
         yield return new WaitUntil(() => Input.GetButtonDown("Fire1") || Input.GetMouseButtonDown(0));
-        //falta apagar un mensaje que digas "CLICK PARA JUGAR"
+        isParpadeando=false;
         musicaAmbiente.GetComponent<AudioSource>().Play();
         musicaFondo.GetComponent<AudioSource>().Play();
         yield return new WaitUntil(() => GameStarted == true);
