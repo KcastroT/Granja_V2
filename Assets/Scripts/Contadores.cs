@@ -25,7 +25,6 @@ namespace Contador
 
         public GameObject GameManagerReference;  //recibir booleano del game manager para reiniciar el contadores 
 
-        private string modo = "";
 
         public int contadorMaiz; //Contador de maiz por poner en el campo
         public int contadorTrigo; //Contador de trigo por poner en el campo
@@ -55,7 +54,6 @@ namespace Contador
         private float cantidadbanco = 350;//Cantidad de dinero prestado por banco
         private float cantidadcoyote = 250;//Cantidad de dinero prestado por coyote
 
-        public TextMeshProUGUI textoModo;
         public TextMeshProUGUI textoDineroPrestamo;
         public TextMeshProUGUI textoInsumos;
         public TextMeshProUGUI textoDineroNoticias;
@@ -201,7 +199,7 @@ namespace Contador
         {
             Ventas += (MaizCosechado * precioMaiz) + (TrigoCosechado * precioTrigo) + (CebadaCosechado * precioCebada) + (ZanahoriaCosechado * precioZanahoria);
             textoVentas.text = Ventas.ToString();
-            sistemaMoneda.SumarMonedas((MaizCosechado * precioMaiz) + (TrigoCosechado * precioTrigo) + (CebadaCosechado * precioCebada) + (ZanahoriaCosechado * precioZanahoria));
+            sistemaMoneda.AñadirMonedas((MaizCosechado * precioMaiz) + (TrigoCosechado * precioTrigo) + (CebadaCosechado * precioCebada) + (ZanahoriaCosechado * precioZanahoria));
             textoCebadaCosechado.text = CebadaCosechado.ToString();
             textoMaizCosechado.text = MaizCosechado.ToString();
             textoTrigoCosechado.text = TrigoCosechado.ToString();
@@ -217,13 +215,12 @@ namespace Contador
         //Función para mostrar la cuenta final del jugador
         public void CuentaFinal()
         {
-            textoModo.text = modo;
             textoInsumos.text = insumos.ToString();
             textoDineroNoticias.text = sistemaMoneda.dineroNoticias.ToString();
             textoVentas.text = Ventas.ToString();
             textoBalance.text = sistemaMoneda.moneda.ToString();
 
-            Debug.Log("Modo de juego: " + modo + " Prestamo: " + dineroInicial + " Insumos: " + insumos + " Bono de pregunta" + 0 + " Noticias: " + sistemaMoneda.dineroNoticias + " Ventas: " + Ventas);
+            Debug.Log(" Prestamo: " + dineroInicial + " Insumos: " + insumos + " Bono de pregunta" + 0 + " Noticias: " + sistemaMoneda.dineroNoticias + " Ventas: " + Ventas);
         }
 
         //Función para decrementar el contador del maíz
@@ -287,6 +284,7 @@ namespace Contador
         {
             textoContadorMaiz.text = contadorMaiz.ToString();
         }
+
         private void ActualizarTextoContadorTrigo()
         {
             textoContadorTrigo.text = contadorTrigo.ToString();

@@ -22,12 +22,13 @@ public class sistemaMoneda : MonoBehaviour
     {
         moneda = 400;
         dineroNoticias = 0;
-        if (textoMoneda == null)
+        if (textoMoneda == null){
             textoMoneda = GetComponent<TextMeshProUGUI>();
-
-        if (textoMoneda != null)
+        }
+        if (textoMoneda != null){
             ActualizarTextoMoneda();
             ActualizarSlider();
+        }
 
         if (BarraDeuda != null)
         {
@@ -35,6 +36,10 @@ public class sistemaMoneda : MonoBehaviour
             BarraDeuda.maxValue = 300;  // Valor máximo fijo
             BarraDeuda.value = Mathf.Max(0, -moneda);  // Valor inicial, asegurando que no sea negativo
         }
+    }
+    public int GetMoneda()
+    {
+        return moneda;
     }
 
 
@@ -46,15 +51,7 @@ public class sistemaMoneda : MonoBehaviour
     }
 
     //Al perder o ganar, se muestra un mensaje
-    public void MostrarEnding(){
-        if (moneda < 0)
-        {
-            MensajeEnding.text= "Perdiste esta partida".ToString();
-        }else{
-            MensajeEnding.text= "Ganaste esta partida".ToString();
-
-        }
-    }
+    
 
 
     public void RestarMonedas(int cantidad)
@@ -74,12 +71,6 @@ public class sistemaMoneda : MonoBehaviour
         ActualizarSlider();
     }
 
-    public void SumarMonedas(int cantidad)
-    {
-        moneda += cantidad;
-        ActualizarTextoMoneda();
-        ActualizarSlider();
-    }
 
 
    

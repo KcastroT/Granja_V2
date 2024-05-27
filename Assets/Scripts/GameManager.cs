@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private bool isParpadeando = false;
     private float tiempotranscurrido = 0;
 
+
     public int contadorDeDias = 0;
     private int d = 0; 
 
@@ -29,7 +30,12 @@ public class GameManager : MonoBehaviour
 
     public GameObject VentaPanel;
     public GameObject VentaBalance;
+    public TextMeshProUGUI MensajeEnding;
+
     public GameObject PreguntaPanel;
+
+    public GameObject moneda;   // Referencia al script de Sistemamoneda
+    public sistemaMoneda monedaScript;
     public bool ReiniciarConta = false;
     public bool GameStarted = false;
     public bool TutorialActive = false;
@@ -56,6 +62,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ShowTutorial());
         contadorDeDias = 0;
         print("Día " + contadorDeDias);
+        if (moneda != null)
+        {
+            monedaScript = moneda.GetComponent<sistemaMoneda>();
+        }
     }
     public void Update()
     {
@@ -135,6 +145,7 @@ public class GameManager : MonoBehaviour
         timer.SetActive(true);
     }
 
+
     public void AumentoDeDias()
     {
         contadorDeDias++;
@@ -184,21 +195,24 @@ public class GameManager : MonoBehaviour
 
     public void PrenderBalance()
     {
-        if (contadorDeDias >= 6)
+        if (contadorDeDias >= 3)
         {
             StartCoroutine(verVentanaBalance());
         }
 
     }
 
-    // public void PrenderBalanceunitario()
-    // {
-    //     if (moneda.BarraDeuda.value >= 300)
-    //     {
-    //         StartCoroutine(verVentanaBalance());
-    //     }
+    public void PrenderBalanceunitario()
+    {
+        if (monedaScript != null && monedaScript.GetMoneda() <= -300)
+        {
+            StartCoroutine(verVentanaBalance());
+            //mostrar bad ending
+            MensajeEnding.text = "Perdiste, \n Exceso de deuda";
 
-    // }
+        }
+    }
+
     IEnumerator verVentanaBalance()  // Function to trigger a random event
     {
         yield return new WaitForSeconds(0.5f);

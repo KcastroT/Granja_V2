@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 7eef593b44b86fe40b7330409a2a5b63
+  - enabled: 1
+    path: Assets/Scenes/Examen.unity
+    guid: a02c95f9079e9480eb5b13d9fa6a58a9
   m_configObjects: {}
